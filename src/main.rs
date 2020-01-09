@@ -1,16 +1,28 @@
-use std::io;
 use rand::Rng;
 
-fn main() 
-{
-    // let mut x = String::new();
+fn main() {
+    let set: [i32; 6] = [1, 2, 3, 4, 5, 6];
 
-    // io::stdin().read_line(&mut x)
-    //            .expect("Failed to read line");
-    
+    for num in set.iter() {
+        print(num.to_string());
+    }
+    linebreak();
+
     let x = rand::thread_rng().gen_range(1, 101);
 
-    println!("{}", x);
+    if x < 50 {
+        print("Less than 50".to_string());
+    }
 
+    let string: String = x.to_string();
+
+    print(string);
 }
- 
+
+fn print(ln: String) {
+    println!("{}", ln);
+}
+
+fn linebreak() {
+    println!("");
+}
