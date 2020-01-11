@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/output.dir/src/main.cpp.o CMakeFiles/output.dir/src/thirdparty/glad.cpp.o  -o output  -lSDL2 /usr/lib/libOpenGL.so /usr/lib/libGL.so -ldl -lpthread 

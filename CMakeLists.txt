@@ -22,7 +22,7 @@ if (UNIX)
 endif(UNIX)
 
 if (WIN32)
-	include_directories(${executable}
+	include_directories(${exe}
 		"C:/dev/glm"
 		"C:/dev/SDL2/include/"
 		"C:/dev/SDL2_image/include/"
@@ -35,28 +35,29 @@ find_package(Threads REQUIRED)
 find_package(OpenGL REQUIRED)
 
 if (UNIX)
-	include_directories(${executable}
+	include_directories(${exe}
 		${SDL2_INCLUDE_DIR}
 	)
 endif (UNIX)
 
-include_directories(${executable}
-	${IncludeDIR}
+include_directories(${exe}
+	${include}
 )
 
-file(GLOB SourceFiles 
-	${SrcDIR}/*
+file(GLOB src 
+	${src}/*
+	${src}/thirdparty/*
 )
 
-add_executable(${executable} ${SourceFiles})
+add_executable(${exe} ${src})
 
-set_target_properties(${executable} PROPERTIES
+set_target_properties(${exe} PROPERTIES
 	CXX_STANDARD 17
 	CXX_EXTENSIONS OFF
 )
 
 if (UNIX)
-	target_link_libraries(${executable}
+	target_link_libraries(${exe}
 		SDL2
 		OpenGL::OpenGL
 		OpenGL::GL
@@ -65,7 +66,7 @@ if (UNIX)
 endif (UNIX)
 
 if (WIN32)
-	target_link_libraries(${executable}
+	target_link_libraries(${exe}
 		"C:/dev/SDL2/lib/x64/SDL2.lib"
 		"C:/dev/SDL2/lib/x64/SDL2main.lib"
 		"C:/dev/SDL2/lib/x64/SDL2test.lib"
@@ -73,6 +74,6 @@ if (WIN32)
 	)
 endif (WIN32)
 
-target_link_libraries(${executable}
+target_link_libraries(${exe}
 	${CMAKE_DL_LIBS}
 )

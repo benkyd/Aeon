@@ -1,0 +1,3 @@
+/home/ben/mnt/Projects-linux/2d-gi/build/CMakeFiles/rebuild_cache.dir
+/home/ben/mnt/Projects-linux/2d-gi/build/CMakeFiles/output.dir
+/home/ben/mnt/Projects-linux/2d-gi/build/CMakeFiles/edit_cache.dir
