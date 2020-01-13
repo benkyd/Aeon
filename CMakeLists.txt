@@ -23,9 +23,7 @@ endif(UNIX)
 
 if (WIN32)
 	include_directories(${exe}
-		"C:/dev/glm"
 		"C:/dev/SDL2/include/"
-		"C:/dev/SDL2_image/include/"
 	)
 endif (WIN32)
 
@@ -67,10 +65,10 @@ endif (UNIX)
 
 if (WIN32)
 	target_link_libraries(${exe}
+		${WinSDK}
 		"C:/dev/SDL2/lib/x64/SDL2.lib"
 		"C:/dev/SDL2/lib/x64/SDL2main.lib"
 		"C:/dev/SDL2/lib/x64/SDL2test.lib"
-		${WinSDK}
 	)
 endif (WIN32)
 

@@ -1,10 +1,15 @@
 #include <iostream>
 
+#include <glad/glad.h>
+
+#ifdef _WIN32
+#include <SDL.h>
+#undef main
+#elif UNIX
 #include <SDL2/SDL.h>
-#include <glad/glad.hpp>
+#endif
 
 void doInput(SDL_Event* e, bool& isWindowOpen);
-
 
 struct Game
 {
@@ -55,13 +60,14 @@ int main()
 
         doInput(&e, IsWindowOpen);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearBufferfv(GL_COLOR, 0, clearColour);
 
         SDL_GL_SwapWindow(game.Window);
 
     }
 
+	return 0;
 
 }
 

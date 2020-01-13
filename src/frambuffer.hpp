@@ -1,5 +1,6 @@
 #pragma once
 
+//#include <glad/glad.hpp>
 
 class FrameBuffer
 {
@@ -11,7 +12,8 @@ public:
     void Render();
 
 
-
+    uint32_t data;
+    
 
 };
 
