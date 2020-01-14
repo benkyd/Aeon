@@ -44,6 +44,7 @@ include_directories(${exe}
 
 file(GLOB src 
 	${src}/*
+	${src}/util/*
 	${src}/thirdparty/*
 )
 
