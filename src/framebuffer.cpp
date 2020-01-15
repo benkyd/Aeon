@@ -66,6 +66,16 @@ void FrameBuffer::DumpToFile( std::string file )
 	free( imageData );
 }
 
+int FrameBuffer::GetWidth()
+{
+	return mWidth;
+}
+
+int FrameBuffer::GetHeight()
+{
+	return mHeight;
+}
+
 FrameBuffer::~FrameBuffer()
 {
 	free( Data );

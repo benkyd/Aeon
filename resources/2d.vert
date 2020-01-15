@@ -1,14 +1,12 @@
-#version 450 core
+#version 430
 
-layout (location = 0) in vec3 position;
+layout (location = 0) in vec3 iPos;
+layout (location = 1) in vec2 iTextCoord;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 proj;
+out vec2 fTextCoord;
 
-void main() {
-	
-	
-	gl_Position = proj * view * model * vec4(position, 1.0);
-
+void main()
+{
+    gl_Position = vec4(iPos, 1.0);
+    fTextCoord = iTextCoord;
 }

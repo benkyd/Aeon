@@ -21,6 +21,21 @@ struct Game
 	SDL_GLContext GlContext = nullptr;
 };
 
+void GLAPIENTRY
+MessageCallback( GLenum source,
+	GLenum type,
+	GLuint id,
+	GLenum severity,
+	GLsizei length,
+	const GLchar* message,
+	const void* userParam )
+{
+	std::cout << "GL CALLBACK: type = " << type
+		<< ", severity = " << severity
+		<< ", message = " << message << std::endl;
+
+}
+
 int main()
 {
 
@@ -59,12 +74,20 @@ int main()
 	// Time to actually load OpenGL
 	gladLoadGLLoader( SDL_GL_GetProcAddress );
 
+	glEnable( GL_DEBUG_OUTPUT );
+	glDebugMessageCallback( MessageCallback, 0 );
+
 	Renderer renderer;
 	renderer.LoadShader();
 
 	FrameBuffer framebuffer{ game.Width, game.Height };
 	framebuffer.SetPixel( 1, 1, { 1.0, 0.0, 0.0 } );
-	framebuffer.DumpToFile( "image.png" );
+	framebuffer.SetPixel( 2, 1, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 3, 1, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 4, 1, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 5, 1, { 1.0, 0.0, 0.0 } );
+
+	renderer.RegisterBuffer( &framebuffer, 0 );
 
 	SDL_Event e;
 	const float clearColour[] = { 186.0f / 255.0f, 214.0f / 255.0f, 254.0f / 255.0f };
@@ -77,6 +100,8 @@ int main()
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		glClearBufferfv( GL_COLOR, 0, clearColour );
+
+		renderer.Render();
 
 		SDL_GL_SwapWindow( game.Window );
 

@@ -1,9 +1,13 @@
-#version 450 core
+#version 430
 
-out vec4 outColour;
+out vec4 FragColour;
+  
+in vec2 fTextCoord;
 
-void main() {
+uniform sampler2D iTexture;
 
-	outColour = vec4(.9, .9, .9, 1);
-
+void main() 
+{
+	FragColour = texture(iTexture, fTextCoord);
+	// FragColour = vec4( 1.0, .0, .0, 1.0); // texture(iTexture, fTextCoord);	
 }

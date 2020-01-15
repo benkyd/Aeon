@@ -16,6 +16,9 @@ public:
 
 	void DumpToFile( std::string file );
 
+	int GetWidth();
+	int GetHeight();
+
 	uint32_t* Data;
 
 	~FrameBuffer();
