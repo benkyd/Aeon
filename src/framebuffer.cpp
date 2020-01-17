@@ -26,7 +26,7 @@ void FrameBuffer::SetPixel( int x, int y, glm::vec3 p )
 	uint8_t r = (uint8_t)( pow( p.r, gamma ) * 255.0f );
 	uint8_t g = (uint8_t)( pow( p.g, gamma ) * 255.0f );
 	uint8_t b = (uint8_t)( pow( p.b, gamma ) * 255.0f );
-	uint32_t col = 0xFF000000 | r << 16 | g << 8 | b;
+	uint32_t col = r << 24 | g << 16 | b << 8 | 0xFF;
 	Data[i] = col;
 }
 

@@ -9,5 +9,5 @@ uniform sampler2D iTexture;
 void main() 
 {
 	FragColour = texture(iTexture, fTextCoord);
-	// FragColour = vec4( 1.0, .0, .0, 1.0); // texture(iTexture, fTextCoord);	
+	// FragColour = vec4( 1.0, .0, .0, 1.0 );
 }

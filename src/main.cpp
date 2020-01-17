@@ -21,14 +21,13 @@ struct Game
 	SDL_GLContext GlContext = nullptr;
 };
 
-void GLAPIENTRY
-MessageCallback( GLenum source,
-	GLenum type,
-	GLuint id,
-	GLenum severity,
-	GLsizei length,
-	const GLchar* message,
-	const void* userParam )
+void GLAPIENTRY MessageCallback( GLenum source,
+								GLenum type,
+								GLuint id,
+								GLenum severity,
+								GLsizei length,
+								const GLchar* message,
+								const void* userParam )
 {
 	std::cout << "GL CALLBACK: type = " << type
 		<< ", severity = " << severity
@@ -74,8 +73,9 @@ int main()
 	// Time to actually load OpenGL
 	gladLoadGLLoader( SDL_GL_GetProcAddress );
 
-	glEnable( GL_DEBUG_OUTPUT );
-	glDebugMessageCallback( MessageCallback, 0 );
+	// Doesnt work
+	//glEnable( GL_DEBUG_OUTPUT );
+	//glDebugMessageCallback( MessageCallback, 0 );
 
 	Renderer renderer;
 	renderer.LoadShader();
@@ -86,6 +86,16 @@ int main()
 	framebuffer.SetPixel( 3, 1, { 1.0, 0.0, 0.0 } );
 	framebuffer.SetPixel( 4, 1, { 1.0, 0.0, 0.0 } );
 	framebuffer.SetPixel( 5, 1, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 1, 2, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 2, 2, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 3, 2, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 4, 2, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 5, 3, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 1, 3, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 2, 3, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 3, 3, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 4, 3, { 1.0, 0.0, 0.0 } );
+	framebuffer.SetPixel( 5, 3, { 1.0, 0.0, 0.0 } );
 
 	renderer.RegisterBuffer( &framebuffer, 0 );
 

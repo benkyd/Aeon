@@ -105,15 +105,16 @@ int8_t Renderer::RegisterBuffer( FrameBuffer* buffer, int layer )
 	// Load buffer as a texture into OpenGL
 	GLuint texture;
 	glGenTextures( 1, &texture );
+	glBindTexture( GL_TEXTURE_2D, texture );
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, buffer->GetWidth(), buffer->GetHeight(), 0, GL_RGB, GL_RGBA32UI, buffer->Data );
+	// Colour stored as uint32_t so 0xRRGGBBAA except no A
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, buffer->GetWidth(), buffer->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer->Data );
 
-	
 	FrameBufferRenderable fb =
 	{
 			buffer,
@@ -160,7 +161,7 @@ void Renderer::UpdateBuffer( int8_t id )
 		return;
 
 	FrameBuffer* buffer = mRenderQueue[id].Buffer;
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, buffer->GetWidth(), buffer->GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, buffer->Data );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, buffer->GetWidth(), buffer->GetHeight(), 0, GL_RGBA, GL_RGBA32UI, buffer->Data );
 }
 
 void Renderer::Render()
@@ -171,8 +172,8 @@ void Renderer::Render()
 	for ( size_t i = 0; i < mRenderQueue.size(); i++ )
 	{
 		FrameBufferRenderable* fb = &mRenderQueue[i];
-		glBindTexture( GL_TEXTURE_2D, fb->TextureID );
 		glBindVertexArray( fb->VAO );
+		glBindTexture( GL_TEXTURE_2D, fb->TextureID );
 		glDrawElements( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );
 	}
 }
