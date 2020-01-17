@@ -17,62 +17,49 @@ set(include ./include)
 add_definitions(-DRESOURCES="${CMAKE_SOURCE_DIR}/resources/")
 message(${CMAKE_SOURCE_DIR}/resources)
 
-if (UNIX)
-	find_package(SDL2 REQUIRED)
-endif(UNIX)
-
-if (WIN32)
-	include_directories(${exe}
-		"C:/dev/SDL2/include/"
-	)
-endif (WIN32)
-
+file(GLOB src 
+	${src}/*
+)
 
 set(THREADS_PREFER_PTHREAD_FLAD ON)
 find_package(Threads REQUIRED)
+
+# Find GL and GLX package
 find_package(OpenGL REQUIRED)
 
-if (UNIX)
-	include_directories(${exe}
-		${SDL2_INCLUDE_DIR}
-	)
-endif (UNIX)
+include_directories(${include})
 
-include_directories(${exe}
-	${include}
-)
-
-file(GLOB src 
-	${src}/*
-	${src}/util/*
-	${src}/thirdparty/*
-)
-
-add_executable(${exe} ${src})
-
-set_target_properties(${exe} PROPERTIES
-	CXX_STANDARD 17
-	CXX_EXTENSIONS OFF
-)
 
 if (UNIX)
-	target_link_libraries(${exe}
-		SDL2
-		OpenGL::OpenGL
-		OpenGL::GL
-		Threads::Threads
-	)
+    find_package(X11 REQUIRED)
+    find_package(PNG REQUIRED)
+    include_directories(${PNG_INCLUDE_DIR})
 endif (UNIX)
 
 if (WIN32)
-	target_link_libraries(${exe}
-		${WinSDK}
-		"C:/dev/SDL2/lib/x64/SDL2.lib"
-		"C:/dev/SDL2/lib/x64/SDL2main.lib"
-		"C:/dev/SDL2/lib/x64/SDL2test.lib"
-	)
+    include_directories(${WinSDK})
 endif (WIN32)
 
-target_link_libraries(${exe}
-	${CMAKE_DL_LIBS}
+add_executable(${exe} 
+    ${src}
 )
+
+link_libraries(${exe}
+    Threads::Threads
+    OpenGL::OpenGL
+    OpenGL::GL
+    OpenGL::GLX
+)
+
+if (UNIX) 
+    link_libraries(${exe} 
+        ${X11_LIBRARIES}
+        PNG::PNG
+    )
+endif (UNIX)
+
+if (WIN32)
+    link_libraries(${exe} 
+        ${WinSDK}
+    )
+endif (WIN32)

@@ -107,6 +107,7 @@ int8_t Renderer::RegisterBuffer( FrameBuffer* buffer, int layer )
 	glGenTextures( 1, &texture );
 	glBindTexture( GL_TEXTURE_2D, texture );
 
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -114,6 +115,7 @@ int8_t Renderer::RegisterBuffer( FrameBuffer* buffer, int layer )
 
 	// Colour stored as uint32_t so 0xRRGGBBAA except no A
 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, buffer->GetWidth(), buffer->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer->Data );
+	//glTexSubImage2D( GL_TEXTURE_2D, 0, 0, 0, buffer->GetWidth(), buffer->GetHeight(), GL_RGBA, GL_UNSIGNED_BYTE, buffer->Data );
 
 	FrameBufferRenderable fb =
 	{
@@ -122,10 +124,10 @@ int8_t Renderer::RegisterBuffer( FrameBuffer* buffer, int layer )
 			layer,
 		{
 			// positions          // texture coords
-			 1.0f,  1.0f, 0.0f,   1.0f, 1.0f,   // top right
-			 1.0f, -1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-			-1.0f, -1.0f, 0.0f,   0.0f, 0.0f,   // bottom left
-			-1.0f,  1.0f, 0.0f,   0.0f, 1.0f    // top left 
+			 1.0f,  1.0f, 0.0f,   1.0f, 0.0f,   // top right
+			 1.0f, -1.0f, 0.0f,   1.0f, 1.0f,   // bottom right
+			-1.0f, -1.0f, 0.0f,   0.0f, 1.0f,   // bottom left
+			-1.0f,  1.0f, 0.0f,   0.0f, 0.0f    // top left 
 		}
 	};
 
@@ -147,7 +149,7 @@ int8_t Renderer::RegisterBuffer( FrameBuffer* buffer, int layer )
 
 	mRenderQueue.push_back( fb );
 
-	return mRenderQueue.size();
+	return mRenderQueue.size() - 1;
 }
 
 FrameBuffer* Renderer::GetBuffer( int8_t id )
@@ -157,10 +159,8 @@ FrameBuffer* Renderer::GetBuffer( int8_t id )
 
 void Renderer::UpdateBuffer( int8_t id )
 {
-	if ( id > mRenderQueue.size() )
-		return;
-
 	FrameBuffer* buffer = mRenderQueue[id].Buffer;
+	glBindTexture( GL_TEXTURE_2D, mRenderQueue[id].TextureID );
 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, buffer->GetWidth(), buffer->GetHeight(), 0, GL_RGBA, GL_RGBA32UI, buffer->Data );
 }
 

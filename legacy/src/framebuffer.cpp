@@ -53,13 +53,14 @@ void FrameBuffer::DumpToFile( std::string file )
 		for ( int y = 0; y < mHeight; y++ ) {
 			// Red and Blue channels need to be swapped, no clue why
 			// saving the framebuffer just doesnt work
-			uint32_t pixel = Data[y * mWidth + x];
-			uint8_t er = ( pixel & 0x000000FF );
-			uint8_t eg = ( pixel & 0x0000FF00 ) >> 8;
-			uint8_t eb = ( pixel & 0x00FF0000 ) >> 16;
-			uint8_t ea = ( pixel & 0xFF000000 ) >> 24;
 
-			imageData[y * mWidth + x] = P{ (unsigned char)eb, (unsigned char)eg, (unsigned char)er, (unsigned char)ea };
+			//nvm it just doesnt work
+			uint32_t pixel = Data[y * mWidth + x];
+			uint8_t er = ( pixel & 0x0000FF00 );
+			uint8_t eg = ( pixel & 0x00FF0000 ) >> 8;
+			uint8_t eb = ( pixel & 0xFF0000FF ) >> 16;
+
+			imageData[y * mWidth + x] = P{ (unsigned char)er, (unsigned char)eg, (unsigned char)eb, 0xFF };
 		}
 
 	stbi_write_png( file.c_str(), mWidth, mHeight, sizeof( P ), imageData, sizeof( P ) * mWidth );
