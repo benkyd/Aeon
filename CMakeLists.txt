@@ -1,10 +1,13 @@
 # Cmake OwO
 
 cmake_minimum_required(VERSION 3.7)
-project(2D_GLOBAL_ILLUMINATION)
+project(AEON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} CMakeModules/)
 cmake_policy(SET CMP0037 OLD) # alow for spaces in file names
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_BUILD_TYPE Debug)
 # set(CMAKE_CXX_FLAGS "-Ofast")

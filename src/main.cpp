@@ -16,7 +16,9 @@ public:
 
 	bool OnUserUpdate( float fElapsedTime ) override
 	{
-
+		for ( int x = 0; x < ScreenWidth(); x++ )
+			for ( int y = 0; y < ScreenHeight(); y++ )
+				Draw( x, y, olc::Pixel( x % 255, y % 255, rand() % 255 ) );
 
 		return true;
 	}
@@ -26,6 +28,6 @@ public:
 int main( int argc, char** argv )
 {
 	Application app;
-	if ( app.Construct( 700, 700, 1, 1, false ) )
+	if ( app.Construct( 700, 700, 1, 1, false, true ) )
 		app.Start();
 }
