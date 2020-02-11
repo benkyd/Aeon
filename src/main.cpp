@@ -1,5 +1,4 @@
 #define OLC_PGE_APPLICATION
-#include <olcPixelGameEngine.hpp>
 
 class Application : public olc::PixelGameEngine
 {
