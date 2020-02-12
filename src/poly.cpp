@@ -22,6 +22,7 @@ int Polygon::AddSide( Segment segment )
 {
 	mIterator++;
 	mSides[mIterator] = segment;
+	return mIterator;
 }
 
 void Polygon::RemoveSide( int segment )

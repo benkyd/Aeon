@@ -1,32 +1,39 @@
 #define OLC_PGE_APPLICATION
 
-class Application : public olc::PixelGameEngine
+#include "display.hpp"
+
+#include <thread>
+#include <chrono>
+
+void EngineThread( Aeon::Display* disp )
 {
-public:
-	Application()
+	Aeon::DisplayBuff buf( 500, 500 );
+	while ( true )
 	{
-		sAppName = "2D Global Illumination";
+
+		for ( int x = 0; x < 500; x++ )
+		for ( int y = 0; y < 500; y++ )
+			buf.Set( x, y, { (float)( rand() % 255 ) / 255.0f,
+						  (float)( rand() % 255 ) / 255.0f,
+						  (float)( rand() % 255 ) / 255.0f } );
+
+		disp->NewFrame( &buf );
+
+		static std::chrono::milliseconds dura( 10 );
+		std::this_thread::sleep_for( dura );
 	}
-
-	bool OnUserCreate() override
-	{
-		return true;
-	}
-
-	bool OnUserUpdate( float fElapsedTime ) override
-	{
-		for ( int x = 0; x < ScreenWidth(); x++ )
-			for ( int y = 0; y < ScreenHeight(); y++ )
-				Draw( x, y, olc::Pixel( x % 255, y % 255, rand() % 255 ) );
-
-		return true;
-	}
-
-};
+}
 
 int main( int argc, char** argv )
 {
-	Application app;
-	if ( app.Construct( 700, 700, 1, 1, false, true ) )
-		app.Start();
+	Aeon::Display display;
+
+	display.Init( 500, 500 );
+	display.SetTitle( "BRuh" );
+
+	std::thread thread( EngineThread, &display );
+
+	display.Start();
+
+	thread.detach();
 }

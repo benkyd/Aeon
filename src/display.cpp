@@ -68,7 +68,41 @@ bool Aeon::Display::OnUserUpdate( float fElapsedTime )
 
 	if ( mNewFrame )
 	{
-		
+
+		if ( mNextFrame == nullptr )
+		{
+			mNewFrame = false;
+			return true;
+		}
+
+		for ( int x = 0; x < mNextFrame->w; x++ )
+		for ( int y = 0; y < mNextFrame->w; y++ )
+		{
+			// tonemap, gamma correct and write
+			// colours are assumed to input as HDR
+
+			auto Clamp = []( glm::vec3 p, float max, float min ) -> glm::vec3
+			{
+				glm::vec3 ret;
+				ret.r = std::max( min, std::min( p.r, max ) );
+				ret.g = std::max( min, std::min( p.g, max ) );
+				ret.b = std::max( min, std::min( p.b, max ) );
+				return ret;
+			};
+
+			// Just clamping now
+			glm::vec3 p = Clamp( mNextFrame->At( x, y ), 1.0f, 0.0f );
+
+			// Gamma correction
+			static const float Gamma = 1.0f / 2.2f;
+
+			olc::Pixel pix(
+				(uint8_t)( pow( p.r, Gamma ) * 255.0f ),
+				(uint8_t)( pow( p.g, Gamma ) * 255.0f ),
+				(uint8_t)( pow( p.b, Gamma ) * 255.0f ) );
+
+			DrawRect( x, y, 1, 1, pix );
+		}
 
 		mNextFrame = nullptr;
 		mNewFrame = false;

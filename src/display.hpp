@@ -24,7 +24,7 @@ struct DisplayBuff
 // for the time being NEEDS to run on main thread
 class Display : public olc::PixelGameEngine
 {
-
+public:
 	Display();
 	void Init( int x, int y );
 	void Init( int x, int y, std::string title );
