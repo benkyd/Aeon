@@ -1,8 +1,0 @@
-[package]
-name = "global_illumination_2d_render"
-version = "0.1.0"
-authors = ["Ben <benjaminkyd@gmail.com>"]
-edition = "2018"
-
-[dependencies]
-rand = "0.7.2"
