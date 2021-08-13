@@ -1,11 +1,13 @@
-#include <Aeon/Aeon.hpp>
+#include "Aeon/Aeon.hpp"
 
-Aeon::Core::Engine::Engine()
+Aeon::Core::App::App(const AppProperties& props)
 {
+
+	Aeon::Core::Display::GetInstance();
 
 }
 
-const Aeon::Core::Display& Aeon::Core::Engine::getDisplay()
+const Aeon::Core::Display& Aeon::Core::App::GetDisplay()
 {
-	return Aeon::Core::Display::getInstance();
+	return Aeon::Core::Display::GetInstance();
 }

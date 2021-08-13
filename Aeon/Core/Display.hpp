@@ -8,7 +8,7 @@ class Display
 public:
     Display();
 
-    static inline Display& getInstance()
+    static inline Display& GetInstance()
     {
         static Display instance;
         return instance;
