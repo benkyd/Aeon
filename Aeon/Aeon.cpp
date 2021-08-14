@@ -1,13 +1,25 @@
 #include "Aeon/Aeon.hpp"
 
-Aeon::Core::App::App(const AppProperties& props)
-{
+using Aeon::Core::App;
+using Aeon::Core::Display;
+using Aeon::Core::DisplayProperties;
 
-	Aeon::Core::Display::GetInstance();
+App::App( const DisplayProperties& props )
+	: mDisplay()
+{
+	mDisplay.Create( props );
 
 }
 
-const Aeon::Core::Display& Aeon::Core::App::GetDisplay()
+void App::Run()
 {
-	return Aeon::Core::Display::GetInstance();
+	while ( !mSIGTERM )
+	{
+
+	}
+}
+
+const Display& App::GetDisplay()
+{
+	return mDisplay;
 }

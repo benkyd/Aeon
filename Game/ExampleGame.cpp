@@ -8,13 +8,14 @@ class ExampleGame : public Aeon::Core::App
 public:
 
 	// take command line args better (parse them first!)
-	ExampleGame( int argc, char** argv )
+	ExampleGame()
 		: App( { "Game with AEON!" } )
 	{
+		Run();
 
 	}
 
-	~ExampleGame() override
+	~ExampleGame()
 	{
 
 	}
@@ -23,5 +24,7 @@ public:
 
 int main( int argc, char** argv )
 {
-	ExampleGame game(argc, argv);
+    ExampleGame game;
+
+    return 0;
 }

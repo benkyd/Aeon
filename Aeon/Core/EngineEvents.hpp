@@ -14,12 +14,6 @@
 
 namespace Aeon::Core {
 
-
-enum EventSystem
-{
-
-};
-
 class GenericEvent
 {
 
