@@ -7,7 +7,8 @@
 
 namespace Aeon::Core {
 
-class AppProperties {
+class AppProperties
+{
 public:
 	std::string Name;
 	int Width, Height;

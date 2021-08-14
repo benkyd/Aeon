@@ -1,5 +1,5 @@
-#ifndef AEON_DISPLAY_H_
-#define AEON_DISPLAY_H_
+#ifndef AEON_CORE_DISPLAY_H_
+#define AEON_CORE_DISPLAY_H_
 
 namespace Aeon::Core {
 
