@@ -4,13 +4,14 @@
 #include <string>
 
 #include <SDL.h>
+extern "C" {
 #include <ThirdParty/glad.h>
+}
 
 namespace Aeon::Core {
 
-class DisplayProperties
+struct DisplayProperties
 {
-public:
 	std::string Name;
 	int Width, Height;
 	bool VSync;

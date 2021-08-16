@@ -71,5 +71,9 @@ unsigned int Display::GetHeight()
 
 void Display::Destroy()
 {
-
+	SDL_DestroyWindow( mWindow );
+	// dangly balls
+	mWindow = nullptr;
+	mWidth = 0;
+	mHeight = 0;
 }

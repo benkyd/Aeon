@@ -1,8 +1,8 @@
-#ifndef AEON_CORE_ENGINEEVENTS_H_
-#define AEON_CORE_ENGINEEVENTS_H_
+#ifndef AEON_CORE_EVENTS_H_
+#define AEON_CORE_EVENTS_H_
 
 /*
-	- events are typed and system'd
+	- events are typed and system'd using a subscriber/publisher-esque observer pattern
 	- systems can request to only receive events from a certain "system" category
 	- systems that dispatch events can create the event and register it as a type
 	- events are queued and non - blocking
@@ -12,16 +12,35 @@
 		  from propagating from the UI layer to the game layer
 */
 
+#include "Aeon/Singleton.hpp"
+
 namespace Aeon::Core {
 
-class GenericEvent
+struct GenericEvent
 {
 
 };
 
-class EventDispatcher
+struct Dispatcher
 {
 
+};
+
+class EventListener
+{
+public:
+	EventListener();
+	virtual ~EventListener();
+};
+
+class EventManager : public Aeon::Helpers::Singleton<EventManager>
+{
+public:
+
+
+	void RegisterDispatcher();
+
+	void Dispatch( GenericEvent& e );
 };
 
 }

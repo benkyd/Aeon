@@ -23,8 +23,9 @@ set(Aeon Aeon)
 file(GLOB EngineSource
 	Aeon/*.cpp
     Aeon/Core/*.cpp
+	Aeon/Debug/*.cpp
+    Aeon/Input/*.cpp
 	Aeon/Maths/*.cpp
-	Aeon/Profiling/*.cpp
     Aeon/ThirdParty/*.cpp
     Aeon/ThirdParty/*.c
 )

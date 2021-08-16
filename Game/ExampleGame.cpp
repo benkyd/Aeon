@@ -12,7 +12,6 @@ public:
 		: App( { "Game with AEON!" } )
 	{
 		Run();
-
 	}
 
 	~ExampleGame()
