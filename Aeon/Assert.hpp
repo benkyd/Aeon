@@ -2,6 +2,7 @@
 #define AEON_ASSERT_H_
 
 #include <assert.h>
+#include <iostream>
 
 #define AEON_ASSERT(x, m) \
     if (! (x)) { \

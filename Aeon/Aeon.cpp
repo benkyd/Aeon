@@ -13,7 +13,7 @@ App::App( const DisplayProperties& props )
 
 void App::Run()
 {
-	while ( !mSIGTERM )
+	// while ( !mSIGTERM )
 	{
 
 	}

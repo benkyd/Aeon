@@ -6,6 +6,7 @@ namespace Aeon::Helpers {
 template <class T>
 class Singleton
 {
+public:
 	static T& GetInstance()
 	{
 		static T instance;

@@ -7,8 +7,13 @@
 using Aeon::Core::Display;
 
 Display::Display()
-	: mWindow( nullptr ),
-	  mContext( NULL )
+	: mWindow( nullptr )
+	, mContext( NULL )
+{
+
+}
+
+Display::~Display()
 {
 
 }
@@ -52,11 +57,6 @@ bool Display::Create( const DisplayProperties& properties )
 	mHeight = properties.Height;
 
 	return true;
-}
-
-Display::~Display()
-{
-
 }
 
 unsigned int Display::GetWidth()
