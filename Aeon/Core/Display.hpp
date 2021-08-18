@@ -8,6 +8,8 @@ extern "C" {
 #include <ThirdParty/glad.h>
 }
 
+#include "Aeon/Core/Events.hpp"
+
 namespace Aeon::Core {
 
 struct DisplayProperties
@@ -23,7 +25,7 @@ struct DisplayProperties
 		  VSync( vSync ) { }
 };
 
-class Display
+class Display : public EventListener
 {
 public:
     Display();
@@ -35,6 +37,8 @@ public:
     unsigned int GetHeight();
 
     void Destroy();
+
+    bool EventRecieved( GenericEvent& e ) override;
 
 private:
     SDL_Window* mWindow;

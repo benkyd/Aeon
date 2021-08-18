@@ -41,7 +41,7 @@ EventDispatcher::EventDispatcher()
 
 EventDispatcher::EventDispatcher( std::string system )
 {
-
+	RegisterAsSource( system );
 }
 
 EventDispatcher::~EventDispatcher()

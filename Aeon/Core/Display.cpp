@@ -10,7 +10,7 @@ Display::Display()
 	: mWindow( nullptr )
 	, mContext( NULL )
 {
-
+	RegisterAsSink( "ENGINE_DISPLAY_CORE", 0 );
 }
 
 Display::~Display()
@@ -76,4 +76,9 @@ void Display::Destroy()
 	mWindow = nullptr;
 	mWidth = 0;
 	mHeight = 0;
+}
+
+bool Display::EventRecieved( GenericEvent& e )
+{
+	return false;
 }

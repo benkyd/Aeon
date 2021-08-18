@@ -4,10 +4,13 @@
 #include <string>
 
 #include "Aeon/Core/Display.hpp"
+#include "Aeon/Core/Events.hpp"
+#include "Aeon/Input/Input.hpp"
 
 namespace Aeon::Core {
 
-class App {
+class App : public EventListener
+{
 public:
 	App( const DisplayProperties& props );
 
@@ -17,10 +20,17 @@ public:
 	void PopLayer();
 
 	const Display& GetDisplay();
+
+	bool EventRecieved( GenericEvent& e ) override;
+
 private:
 
 	Display mDisplay;
 
+	Aeon::Input::Input mInput;
+
+private:
+	
 	bool mSIGTERM = false;
 
 };

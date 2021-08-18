@@ -22,26 +22,35 @@
 
 namespace Aeon::Core {
 
+/*
+* Engine event systems / type
+* ENGINE_SYSTEM_CORE	- start, stop, pause, etc
+* ENGINE_DISPLAY_CORE	- window open, window close, etc
+*	DISPLAY_RESIZE (x, y)	- rezise to x, y being new w, h
+*	DISPLAY_MOVE (x, y)		- move to x, y
+*	DISPLAY_SHOW			- no data
+*	DISPLAY_HIDE			- no data
+*	DISPLAY_MINIMISED		- no data
+*	DISPLAY_MAXIMISED		- no data
+*	DISPLAY_CLOSED			- no data
+*	DISPLAY_MOUSE_ENTER		- no data
+*	DISPLAY_MOUSE_LEAVE		- no data
+*	DISPLAY_FOCUS			- no data
+*	DISPLAY_OUT_OF_FOCUS	- no data
+* 
+*/
+
+
 struct GenericEvent
 {
-	std::string Source;
-	std::string Sink;
+	std::string System;
 	std::string Type;
+	// can be empty
 	std::string Data;
+
 	bool Handled = false;
 
 	GenericEvent() { }
-};
-
-struct KeyboardEvent : public GenericEvent
-{
-	int KeyCode;
-	int KeyStatus;
-
-	KeyboardEvent( int keyCode, int keyStatus )
-		: GenericEvent()
-		, KeyCode(keyCode)
-		, KeyStatus(keyStatus) { }
 };
 
 class EventListener
