@@ -26,6 +26,7 @@ public:
 
 class SomeSystem : public Aeon::Core::EventListener
 {
+public:
 	SomeSystem()
 	{
 		RegisterAsSink( "System1", 0 );
@@ -39,7 +40,28 @@ class SomeSystem : public Aeon::Core::EventListener
 	bool EventRecieved( Aeon::Core::GenericEvent& e ) override
 	{
 		std::cout << e.Source << ":" << e.Type << ":" << e.Sink << ":" << e.Data << std::endl;
-		return true;
+		return false;
+	}
+
+};
+
+class SomeOtherSystem : public Aeon::Core::EventListener
+{
+public:
+	SomeOtherSystem()
+	{
+		RegisterAsSink( "System1", 0 );
+	}
+
+	~SomeOtherSystem() override
+	{
+		DeRegisterAsSink( "System1" );
+	}
+
+	bool EventRecieved( Aeon::Core::GenericEvent& e ) override
+	{
+		std::cout << e.Source << ":" << e.Type << ":" << e.Sink << ":" << e.Data << std::endl;
+		return false;
 	}
 
 };
@@ -48,9 +70,12 @@ int main( int argc, char** argv )
 {
     ExampleGame game;
 
+	SomeSystem system1;
+	SomeOtherSystem system2;
+
 	Aeon::Core::EventDispatcher eventDispatcher;
 	eventDispatcher.RegisterAsSource( "System1" );
-	eventDispatcher.Dispatch( Aeon::Core::KeyboardEvent( 12, 1 ) );
+	eventDispatcher.Dispatch( "bro" );
 
     return 0;
 }

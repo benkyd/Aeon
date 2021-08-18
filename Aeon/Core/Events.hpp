@@ -89,8 +89,8 @@ public:
 	EventManager();
 	~EventManager();
 
-	int RegisterSource( EventDispatcher& source, std::string system );
-	int RegisterSink( EventListener& sink, std::string system );
+	int RegisterSource( EventDispatcher* source, std::string system );
+	int RegisterSink( EventListener* sink, std::string system );
 
 	void RemoveSource( int dispatcherID, std::string system );
 	void RemoveSink( int listenerID, std::string system );
@@ -99,12 +99,12 @@ public:
 private:
 
 	// indexed by listener ID
-	std::map<int, EventListener&> mListeners;
+	std::map<int, const EventListener*> mListeners;
 	// indexed by dispatcher ID
 	std::map<int, std::string> mSources;
 	// indexed by (sink) system ID
 	// their position in the vector is their layer
-	std::map<std::string, std::vector<std::tuple<EventListener&, int>>> mSinks;
+	std::map<std::string, std::vector<std::tuple<EventListener*, int>>> mSinks;
 
 	int mNextHeighest = 0;
 };
