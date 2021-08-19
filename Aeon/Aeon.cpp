@@ -13,6 +13,7 @@ App::App( const DisplayProperties& props )
 	, mInput()
 {
 	RegisterAsSink( "ENGINE_DISPLAY_CORE", 0 );
+	RegisterAsSink( "ENGINE_INPUT_MOUSE", 0 );
 
 	mDisplay.Create( props );
 
@@ -33,7 +34,10 @@ const Display& App::GetDisplay()
 
 bool App::EventRecieved( GenericEvent& e )
 {
-	std::cout << e.Type << std::endl;
+	if ( e.Type == "DISPLAY_CLOSED" )
+	{
+		mSIGTERM = true;
+	}
 
 	return false;
 }

@@ -16,6 +16,15 @@ public:
 
 	void PollInput();
 private:
+
+	void mPollDisplay();
+	void mPollMouse();
+	void mPollScroll();
+	void mPollClick();
+	void mPollKeyboard();
+
+private:
+
 	SDL_Event mEvent;
 
 	Aeon::Core::EventDispatcher mDisplayEventDispatcher;

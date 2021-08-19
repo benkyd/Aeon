@@ -8,6 +8,7 @@
 	- Event listeners are layered, 0 is front, larger is back so 
 		events propogate from the front to the back, not going 
 		further once handled
+	- Event sources can only dispatch events to a single system
 	- Systems can request to only receive events from a certain 
 		"system" category, or multiple
 	- Events are blocking for now
@@ -37,6 +38,16 @@ namespace Aeon::Core {
 *	DISPLAY_MOUSE_LEAVE		- no data
 *	DISPLAY_FOCUS			- no data
 *	DISPLAY_OUT_OF_FOCUS	- no data
+* ENGINE_INPUT_MOUSE
+*	MOUSE_LEFT_DOWN			- no data
+*	MOUSE_LEFT_UP			- no data
+*	MOUSE_RIGHT_DOWN		- no data
+*	MOUSE_RIGHT_UP			- no data
+*	MOUSE_MIDDLE_DOWN		- no data
+*	MOUSE_MIDDLE_UP			- no data
+*	MOUSE_SCROLL			- y+-
+*	MOUSE_MOVE				- move to x, y relative dx, dy
+* ENGINE_INPUT_KEYBOARD
 * 
 */
 
@@ -49,8 +60,10 @@ struct GenericEvent
 	// the rest can be empty
 	std::string Data;
 
-	// DISPLAY_RESIZE DISPLAY_MOVE
+	// DISPLAY_RESIZE DISPLAY_MOVE MOUSE_MOVE
 	int x, y;
+	// MOUSE_MOVE
+	int dx, dy;
 
 	bool Handled = false;
 };
@@ -90,6 +103,7 @@ public:
 	void Dispatch( std::string type );
 
 private:
+	std::string mSystem;
 	int mDispatcherID = -1;
 
 	friend class EventManager;

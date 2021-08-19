@@ -45,6 +45,7 @@ private:
     SDL_GLContext mContext;
 
     unsigned int mWidth, mHeight;
+    unsigned int mX, mY;
 
 private:
     Display( Display const& ) = delete;

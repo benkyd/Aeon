@@ -53,6 +53,7 @@ void EventDispatcher::RegisterAsSource( std::string system )
 {
 	mDispatcherID = EventManager::GetInstance().RegisterSource( this, system );
 	AEON_ASSERT( mDispatcherID != -1, "Cannot register event source" );
+	mSystem = system;
 }
 
 void EventDispatcher::DeRegisterAsSource( std::string system )
@@ -62,6 +63,7 @@ void EventDispatcher::DeRegisterAsSource( std::string system )
 
 void EventDispatcher::Dispatch( GenericEvent e )
 {
+	e.System = mSystem;
 	EventManager::GetInstance().Dispatch( mDispatcherID, e );
 }
 
@@ -69,6 +71,7 @@ void EventDispatcher::Dispatch( std::string type )
 {
 	GenericEvent e;
 	e.Type = type;
+	e.System = mSystem;
 	EventManager::GetInstance().Dispatch( mDispatcherID, e );
 }
 
@@ -122,6 +125,8 @@ void EventManager::RemoveSink( int listenerID, std::string system )
 
 void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 {
+	// TODO: if there's no sinks, discard the event because it would be 
+	// unneccesary effort to keep going with it
 	std::string targetSink = mSources[dispatcherID];
 	auto sinks = mSinks[targetSink];
 	

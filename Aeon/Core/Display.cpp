@@ -80,5 +80,19 @@ void Display::Destroy()
 
 bool Display::EventRecieved( GenericEvent& e )
 {
+	if ( e.Type == "DISPLAY_RESIZE" )
+	{
+		mWidth = e.x;
+		mHeight = e.y;
+		return true;
+	}
+
+	if ( e.Type == "DISPLAY_MOVE" )
+	{
+		mX = e.x;
+		mY = e.y;
+		return true;
+	}
+
 	return false;
 }
