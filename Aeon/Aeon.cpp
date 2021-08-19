@@ -1,5 +1,7 @@
 #include "Aeon/Aeon.hpp"
 
+#include <iostream>
+
 using Aeon::Core::App;
 using Aeon::Core::Display;
 using Aeon::Core::DisplayProperties;
@@ -10,7 +12,7 @@ App::App( const DisplayProperties& props )
 	: mDisplay()
 	, mInput()
 {
-	RegisterAsSink( "ENGINE_SYSTEM_CORE", 0 );
+	RegisterAsSink( "ENGINE_DISPLAY_CORE", 0 );
 
 	mDisplay.Create( props );
 
@@ -31,5 +33,7 @@ const Display& App::GetDisplay()
 
 bool App::EventRecieved( GenericEvent& e )
 {
+	std::cout << e.Type << std::endl;
+
 	return false;
 }

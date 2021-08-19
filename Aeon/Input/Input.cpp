@@ -8,8 +8,11 @@ using Aeon::Input::Input;
 
 Input::Input()
 	: mEvent()
+    , mDisplayEventDispatcher()
+    , mKeyboardEventDispatcher()
+    , mMouseEventDispatcher()
 {
-
+    mDisplayEventDispatcher.RegisterAsSource( "ENGINE_DISPLAY_CORE" );
 }
 
 Input::~Input()
@@ -24,57 +27,74 @@ void Input::PollInput()
 		switch ( mEvent.type )
 		{
         case SDL_WINDOWEVENT:
+        {
             switch ( mEvent.window.event )
             {
             case SDL_WINDOWEVENT_SHOWN:
-                SDL_Log( "Window %d shown", mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_HIDDEN:
-                SDL_Log( "Window %d hidden", mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_MOVED:
-                SDL_Log( "Window %d moved to %d,%d",
-                    mEvent.window.windowID, mEvent.window.data1,
-                    mEvent.window.data2 );
-                break;
-            case SDL_WINDOWEVENT_RESIZED:
-                SDL_Log( "Window %d resized to %dx%d",
-                    mEvent.window.windowID, mEvent.window.data1,
-                    mEvent.window.data2 );
-                break;
-            case SDL_WINDOWEVENT_SIZE_CHANGED:
-                SDL_Log( "Window %d size changed to %dx%d",
-                    mEvent.window.windowID, mEvent.window.data1,
-                    mEvent.window.data2 );
-                break;
-            case SDL_WINDOWEVENT_MINIMIZED:
-                SDL_Log( "Window %d minimized", mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_MAXIMIZED:
-                SDL_Log( "Window %d maximized", mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_RESTORED:
-                SDL_Log( "Window %d restored", mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_ENTER:
-                SDL_Log( "Mouse entered window %d",
-                    mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_LEAVE:
-                SDL_Log( "Mouse left window %d", mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_FOCUS_GAINED:
-                SDL_Log( "Window %d gained keyboard focus",
-                    mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_FOCUS_LOST:
-                SDL_Log( "Window %d lost keyboard focus",
-                    mEvent.window.windowID );
-                break;
-            case SDL_WINDOWEVENT_CLOSE:
-                SDL_Log( "Window %d closed", mEvent.window.windowID );
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_SHOW" );
                 break;
             }
+            case SDL_WINDOWEVENT_HIDDEN:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_HIDE" );
+                break;
+            }
+            case SDL_WINDOWEVENT_MOVED:
+            {
+                Aeon::Core::GenericEvent e;
+                e.x = mEvent.window.data1;
+                e.y = mEvent.window.data2;
+                e.Type = "DISPLAY_MOVE";
+                mDisplayEventDispatcher.Dispatch( e );
+                break;
+            }
+            case SDL_WINDOWEVENT_RESIZED:
+            {
+                Aeon::Core::GenericEvent e;
+                e.x = mEvent.window.data1;
+                e.y = mEvent.window.data2;
+                e.Type = "DISPLAY_RESIZE";
+                mDisplayEventDispatcher.Dispatch( e );
+                break;
+            }
+            case SDL_WINDOWEVENT_MINIMIZED:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_MINIMISED" );
+                break;
+            }
+            case SDL_WINDOWEVENT_MAXIMIZED:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_MAXIMISED" );
+                break;
+            }
+            case SDL_WINDOWEVENT_ENTER:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_MOUSE_ENTER" );
+                break;
+            }
+            case SDL_WINDOWEVENT_LEAVE:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_MOUSE_LEAVE" );
+                break;
+            }
+            case SDL_WINDOWEVENT_FOCUS_GAINED:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_FOCUS" );
+                break;
+            }
+            case SDL_WINDOWEVENT_FOCUS_LOST:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_OUT_OF_FOCUS" );
+                break;
+            }
+            case SDL_WINDOWEVENT_CLOSE:
+            {
+                mDisplayEventDispatcher.Dispatch( "DISPLAY_CLOSED" );
+                break;
+            }
+            }
+        }
 		}
 	}
 

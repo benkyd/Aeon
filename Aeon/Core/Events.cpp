@@ -65,10 +65,10 @@ void EventDispatcher::Dispatch( GenericEvent e )
 	EventManager::GetInstance().Dispatch( mDispatcherID, e );
 }
 
-void EventDispatcher::Dispatch( std::string data )
+void EventDispatcher::Dispatch( std::string type )
 {
 	GenericEvent e;
-	e.Data = data;
+	e.Type = type;
 	EventManager::GetInstance().Dispatch( mDispatcherID, e );
 }
 

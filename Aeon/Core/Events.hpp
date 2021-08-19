@@ -45,12 +45,14 @@ struct GenericEvent
 {
 	std::string System;
 	std::string Type;
-	// can be empty
+	
+	// the rest can be empty
 	std::string Data;
 
-	bool Handled = false;
+	// DISPLAY_RESIZE DISPLAY_MOVE
+	int x, y;
 
-	GenericEvent() { }
+	bool Handled = false;
 };
 
 class EventListener
@@ -84,7 +86,8 @@ public:
 	void DeRegisterAsSource( std::string system );
 
 	void Dispatch( GenericEvent e );
-	void Dispatch( std::string data );
+	// no data needed
+	void Dispatch( std::string type );
 
 private:
 	int mDispatcherID = -1;
