@@ -1,6 +1,8 @@
 #include "Aeon/Input/Input.hpp"
 
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 
 #include "Aeon/Core/Events.hpp"
 
@@ -15,6 +17,10 @@ Input::Input()
     mDisplayEventDispatcher.RegisterAsSource( "ENGINE_DISPLAY_CORE" );
     mMouseEventDispatcher.RegisterAsSource( "ENGINE_INPUT_MOUSE" );
     mKeyboardEventDispatcher.RegisterAsSource( "ENGINE_INPUT_KEYBOARD" );
+
+    mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &numScancodes ));
+    mOldKbdState = static_cast<uint8_t*>(malloc( numScancodes / sizeof( uint8_t ) ));
+    memcpy( mOldKbdState, mKbdState, 242 / sizeof( uint8_t ) );
 }
 
 Input::~Input()
@@ -22,10 +28,13 @@ Input::~Input()
     mDisplayEventDispatcher.DeRegisterAsSource( "ENGINE_DISPLAY_CORE" );
     mMouseEventDispatcher.DeRegisterAsSource( "ENGINE_INPUT_MOUSE" );
     mKeyboardEventDispatcher.DeRegisterAsSource( "ENGINE_INPUT_KEYBOARD" );
+
+    free( mOldKbdState );
 }
 
 void Input::PollInput()
 {
+    SDL_PumpEvents();
 	while ( SDL_PollEvent( &mEvent ) )
 	{
 		switch ( mEvent.type )
@@ -54,9 +63,22 @@ void Input::PollInput()
 		}
 	}
 
-	//Uint8* state = (Uint8*)SDL_GetKeyboardState( NULL );
-	//std::cout << state << std::endl;
-	//std::cout << std::endl;
+    // just in case
+    mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &numScancodes ));
+
+    // keyboard processing
+
+    // first we want to check if any key has changed
+    // if a key has changed, then we want to check if any keys are pressed
+    // if a key is pressed we want to check the keys and dispatch events
+    // according to the scancode
+    // keydown and keyup will be done seperately
+    if ( !std::equal( mKbdState, mKbdState + numScancodes, mOldKbdState ) )
+    {
+        std::cout << "keyboard ennit" << std::endl;
+    }
+
+    memcpy( mOldKbdState, mKbdState, numScancodes / sizeof( uint8_t ) );
 }
 
 void Input::mPollDisplay()

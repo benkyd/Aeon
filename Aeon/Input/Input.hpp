@@ -15,8 +15,8 @@ public:
 	~Input();
 
 	void PollInput();
-private:
 
+private:
 	void mPollDisplay();
 	void mPollMouse();
 	void mPollScroll();
@@ -24,8 +24,10 @@ private:
 	void mPollKeyboard();
 
 private:
-
 	SDL_Event mEvent;
+	int numScancodes = 242;
+	const uint8_t* mKbdState;
+	uint8_t* mOldKbdState;
 
 	Aeon::Core::EventDispatcher mDisplayEventDispatcher;
 	Aeon::Core::EventDispatcher mKeyboardEventDispatcher;
