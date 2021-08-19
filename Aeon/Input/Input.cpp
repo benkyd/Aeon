@@ -5,6 +5,7 @@
 #include <iterator>
 
 #include "Aeon/Core/Events.hpp"
+#include "Aeon/Input/InputMap.hpp"
 
 using Aeon::Input::Input;
 
@@ -18,8 +19,8 @@ Input::Input()
     mMouseEventDispatcher.RegisterAsSource( "ENGINE_INPUT_MOUSE" );
     mKeyboardEventDispatcher.RegisterAsSource( "ENGINE_INPUT_KEYBOARD" );
 
-    mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &numScancodes ));
-    mOldKbdState = static_cast<uint8_t*>(malloc( numScancodes / sizeof( uint8_t ) ));
+    mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &mNumScancodes ));
+    mOldKbdState = static_cast<uint8_t*>(malloc( mNumScancodes / sizeof( uint8_t ) ));
     memcpy( mOldKbdState, mKbdState, 242 / sizeof( uint8_t ) );
 }
 
@@ -60,25 +61,21 @@ void Input::PollInput()
             mPollMouse();
             break;
         }
+        case SDL_KEYDOWN:
+        case SDL_KEYUP:
+        {
+            mPollKeyboard();
+        }
 		}
 	}
 
     // just in case
-    mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &numScancodes ));
+    mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &mNumScancodes ));
 
     // keyboard processing
+    mPollScanKeyboard();
 
-    // first we want to check if any key has changed
-    // if a key has changed, then we want to check if any keys are pressed
-    // if a key is pressed we want to check the keys and dispatch events
-    // according to the scancode
-    // keydown and keyup will be done seperately
-    if ( !std::equal( mKbdState, mKbdState + numScancodes, mOldKbdState ) )
-    {
-        std::cout << "keyboard ennit" << std::endl;
-    }
-
-    memcpy( mOldKbdState, mKbdState, numScancodes / sizeof( uint8_t ) );
+    memcpy( mOldKbdState, mKbdState, mNumScancodes / sizeof( uint8_t ) );
 }
 
 void Input::mPollDisplay()
@@ -193,7 +190,7 @@ void Input::mPollClick()
         }
         }
     }
-    if ( mEvent.button.state == SDL_RELEASED )
+    else if ( mEvent.button.state == SDL_RELEASED )
     {
         switch ( mEvent.button.button )
         {
@@ -218,5 +215,33 @@ void Input::mPollClick()
 
 void Input::mPollKeyboard()
 {
+    EKeyCode keycode = KeyCodeFromSDL( mEvent.key.keysym.sym );
+    Aeon::Core::GenericEvent e;
+    e.keyCode = keycode;
+    if ( mEvent.key.state == SDL_PRESSED )
+    {
+        e.Type = "KEYBOARD_KEYDOWN";
+    }
+    else if ( mEvent.key.state == SDL_RELEASED )
+    {
+        e.Type = "KEYBOARD_KEYUP";
+    }
+    mKeyboardEventDispatcher.Dispatch( e );
+}
 
+void Input::mPollScanKeyboard()
+{
+    // first we want to check if any key has changed
+    // if a key has changed, then we want to check if any keys are pressed
+    // if a key is pressed we want to check the keys and dispatch events
+    // according to the scancode
+    // keydown and keyup will be done seperately
+    if ( !std::equal( mKbdState, mKbdState + mNumScancodes, mOldKbdState ) )
+    {
+        for ( int i = 0; i < mNumScancodes; i++ )
+        {
+            if ( mKbdState[i] != 0 )
+                std::cout << KeyCodeFromSDL( mKbdState[i] ) << " ";
+        }
+    }
 }

@@ -20,6 +20,7 @@
 #include <map>
 
 #include "Aeon/Singleton.hpp"
+#include "Aeon/Input/InputMap.hpp"
 
 namespace Aeon::Core {
 
@@ -48,7 +49,9 @@ namespace Aeon::Core {
 *	MOUSE_SCROLL			- y+-
 *	MOUSE_MOVE				- move to x, y relative dx, dy
 * ENGINE_INPUT_KEYBOARD
-* 
+*	KEYBOARD_KEYDOWN		- keycode
+*	KEYBOARD_KEYUP			- keycode
+*	KEYBOARD_PRESSED		- keycode for continual pressing
 */
 
 
@@ -58,12 +61,14 @@ struct GenericEvent
 	std::string Type;
 	
 	// the rest can be empty
+	// user defined
 	std::string Data;
-
 	// DISPLAY_RESIZE DISPLAY_MOVE MOUSE_MOVE
 	int x, y;
 	// MOUSE_MOVE
 	int dx, dy;
+	// KEYBOARD_KEYDOWN KEYBOARD_KEYUP KEYBOARD_PRESSED
+	Aeon::Input::EKeyCode keyCode;
 
 	bool Handled = false;
 };

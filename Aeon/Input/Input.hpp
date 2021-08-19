@@ -22,10 +22,12 @@ private:
 	void mPollScroll();
 	void mPollClick();
 	void mPollKeyboard();
+	void mPollScanKeyboard();
 
 private:
 	SDL_Event mEvent;
-	int numScancodes = 242;
+
+	int mNumScancodes = 242;
 	const uint8_t* mKbdState;
 	uint8_t* mOldKbdState;
 
