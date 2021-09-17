@@ -1,6 +1,8 @@
 #ifndef AEON_INPUT_INPUT_H_
 #define AEON_INPUT_INPUT_H_
 
+#include <vector>
+
 #include <SDL.h>
 
 #include "Aeon/Singleton.hpp"
@@ -29,7 +31,6 @@ private:
 
 	int mNumScancodes = 242;
 	const uint8_t* mKbdState;
-	uint8_t* mOldKbdState;
 
 	Aeon::Core::EventDispatcher mDisplayEventDispatcher;
 	Aeon::Core::EventDispatcher mKeyboardEventDispatcher;

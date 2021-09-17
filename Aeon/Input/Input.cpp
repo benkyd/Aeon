@@ -20,8 +20,6 @@ Input::Input()
     mKeyboardEventDispatcher.RegisterAsSource( "ENGINE_INPUT_KEYBOARD" );
 
     mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &mNumScancodes ));
-    mOldKbdState = static_cast<uint8_t*>(malloc( mNumScancodes / sizeof( uint8_t ) ));
-    memcpy( mOldKbdState, mKbdState, 242 / sizeof( uint8_t ) );
 }
 
 Input::~Input()
@@ -30,7 +28,7 @@ Input::~Input()
     mMouseEventDispatcher.DeRegisterAsSource( "ENGINE_INPUT_MOUSE" );
     mKeyboardEventDispatcher.DeRegisterAsSource( "ENGINE_INPUT_KEYBOARD" );
 
-    free( mOldKbdState );
+    // Do not free mKbdState as that is done by SDL
 }
 
 void Input::PollInput()
@@ -74,8 +72,6 @@ void Input::PollInput()
 
     // keyboard processing
     mPollScanKeyboard();
-
-    memcpy( mOldKbdState, mKbdState, mNumScancodes / sizeof( uint8_t ) );
 }
 
 void Input::mPollDisplay()
@@ -231,17 +227,19 @@ void Input::mPollKeyboard()
 
 void Input::mPollScanKeyboard()
 {
-    // first we want to check if any key has changed
-    // if a key has changed, then we want to check if any keys are pressed
-    // if a key is pressed we want to check the keys and dispatch events
-    // according to the scancode
-    // keydown and keyup will be done seperately
-    if ( !std::equal( mKbdState, mKbdState + mNumScancodes, mOldKbdState ) )
+    // this is naive, can be optimised with double buffering
+    for ( int i = 0; i < mNumScancodes; i++ )
     {
-        for ( int i = 0; i < mNumScancodes; i++ )
+        bool isKeyPressed = (bool)mKbdState[i];
+        if ( isKeyPressed )
         {
-            if ( mKbdState[i] != 0 )
-                std::cout << KeyCodeFromSDL( mKbdState[i] ) << " ";
+            EKeyCode whatKeyPressed = KeyCodeFromScanCode( (SDL_Scancode)i );
+
+            Aeon::Core::GenericEvent e;
+            e.keyCode = whatKeyPressed;
+            e.Type = "KEYBOARD_KEYPRESS";
+
+            mKeyboardEventDispatcher.Dispatch( e );
         }
     }
 }

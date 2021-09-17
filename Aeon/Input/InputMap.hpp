@@ -173,6 +173,11 @@ inline EKeyCode KeyCodeFromSDL( SDL_Keycode key )
     return (EKeyCode)key;
 }
 
+inline EKeyCode KeyCodeFromScanCode( SDL_Scancode key )
+{
+    return KeyCodeFromSDL( SDL_GetKeyFromScancode( key ) );
+}
+
 inline EKeyCode KeyCodeFromKeymod( SDL_Keymod key )
 {
     switch ( key )
@@ -219,11 +224,6 @@ inline EKeyCode KeyCodeFromKeymod( SDL_Keymod key )
     default:
         return EKeyCode::Unknown;
     }
-}
-
-inline EKeyCode KeyCodeFromSDL( SDL_Scancode key )
-{
-    return KeyCodeFromSDL( SDL_SCANCODE_TO_KEYCODE( key ) );
 }
 
 }
