@@ -27,6 +27,9 @@ namespace Aeon::Core {
 /*
 * Engine event systems / type
 * ENGINE_SYSTEM_CORE	- start, stop, pause, etc
+*	ENGINE_START			- starts game loop execution
+*	ENGINE_STOP
+*	ENGINE_PAUSE
 * ENGINE_DISPLAY_CORE	- window open, window close, etc
 *	DISPLAY_RESIZE (x, y)	- rezise to x, y being new w, h
 *	DISPLAY_MOVE (x, y)		- move to x, y
@@ -51,7 +54,7 @@ namespace Aeon::Core {
 * ENGINE_INPUT_KEYBOARD
 *	KEYBOARD_KEYDOWN		- keycode
 *	KEYBOARD_KEYUP			- keycode
-*	KEYBOARD_PRESSED		- keycode for continual pressing
+*	KEYBOARD_KEYPRESS		- keycode for continual pressing
 */
 
 

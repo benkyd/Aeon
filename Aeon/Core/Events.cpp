@@ -125,10 +125,13 @@ void EventManager::RemoveSink( int listenerID, std::string system )
 
 void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 {
-	// TODO: if there's no sinks, discard the event because it would be 
-	// unneccesary effort to keep going with it
 	std::string targetSink = mSources[dispatcherID];
 	auto sinks = mSinks[targetSink];
+
+	if ( sinks.empty() )
+	{
+		return;
+	}
 	
 	for ( auto& listenerPair : sinks )
 	{
