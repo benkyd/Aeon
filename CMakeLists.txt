@@ -26,6 +26,7 @@ file(GLOB EngineSource
 	Aeon/Debug/*.cpp
     Aeon/Input/*.cpp
 	Aeon/Maths/*.cpp
+	Aeon/Rendering/*.cpp
     Aeon/ThirdParty/*.cpp
     Aeon/ThirdParty/*.c
 )
