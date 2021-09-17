@@ -9,6 +9,9 @@
 
 namespace Aeon::Core {
 
+// NOTE: Derivations / children of "App" cannot attatch
+// event listeners to themselves, the programmer must
+// first add a gamelayer to handle events
 class App : public EventListener
 {
 public:

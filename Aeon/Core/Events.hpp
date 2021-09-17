@@ -82,7 +82,7 @@ public:
 	EventListener();
 	virtual ~EventListener();
 
-	void RegisterAsSink( std::string system, int layer );
+	void RegisterAsSink( std::string system, int layer = 0 );
 	void DeRegisterAsSink( std::string system );
 
 	void UpdateLayer( int layer );

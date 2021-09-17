@@ -8,22 +8,10 @@ extern "C" {
 #include <ThirdParty/glad.h>
 }
 
+#include "Aeon/Core/EngineConfig.hpp"
 #include "Aeon/Core/Events.hpp"
 
 namespace Aeon::Core {
-
-struct DisplayProperties
-{
-	std::string Name;
-	int Width, Height;
-	bool VSync;
-
-    DisplayProperties( std::string name, int width = 1200, int height = 900, bool vSync = true )
-		: Name( name ),
-		  Width( width ),
-		  Height( height ),
-		  VSync( vSync ) { }
-};
 
 class Display : public EventListener
 {
