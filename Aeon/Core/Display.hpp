@@ -21,8 +21,15 @@ public:
 
     bool Create( const DisplayProperties& properties );
 
-    unsigned int GetWidth();
-    unsigned int GetHeight();
+    const unsigned int GetWidth();
+    const unsigned int GetHeight();
+
+    SDL_Window* GetWindow();
+    const SDL_GLContext& GetContext();
+
+    void SetClearColour( float r, float g, float b, float a = 1.0f );
+
+    void EndFrame();
 
     void Destroy();
 
@@ -34,6 +41,7 @@ private:
 
     unsigned int mWidth, mHeight;
     unsigned int mX, mY;
+    float mClearColour[4];
 
 private:
     Display( Display const& ) = delete;

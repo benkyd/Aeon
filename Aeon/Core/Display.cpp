@@ -3,12 +3,14 @@
 #include <iostream>
 
 #include "Aeon/Assert.hpp"
+#include "Aeon/Rendering/ImGui.hpp"
 
 using Aeon::Core::Display;
 
 Display::Display()
 	: mWindow( nullptr )
 	, mContext( NULL )
+	, mClearColour{ 1.0f, 1.0f, 1.0f, 1.0f }
 {
 	RegisterAsSink( "ENGINE_DISPLAY_CORE", 0 );
 }
@@ -56,17 +58,56 @@ bool Display::Create( const DisplayProperties& properties )
 	mWidth = properties.Width;
 	mHeight = properties.Height;
 
+	Aeon::Rendering::SetupImGui( mWindow, mContext );
+
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+
 	return true;
 }
 
-unsigned int Display::GetWidth()
+const unsigned int Display::GetWidth()
 {
 	return mWidth;
 }
 
-unsigned int Display::GetHeight()
+const unsigned int Display::GetHeight()
 {
 	return mHeight;
+}
+
+SDL_Window* Display::GetWindow()
+{
+	return mWindow;
+}
+
+const SDL_GLContext& Display::GetContext()
+{
+	return mContext;
+}
+
+void Display::SetClearColour( float r, float g, float b, float a )
+{
+	mClearColour[0] = r * a;
+	mClearColour[1] = g * a;
+	mClearColour[2] = b * a;
+	mClearColour[3] = a;
+}
+
+void Display::EndFrame()
+{
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData( ImGui::GetDrawData() );
+	
+	SDL_GL_SwapWindow( mWindow );
+	
+	glClearColor( mClearColour[0], mClearColour[1], mClearColour[2], mClearColour[3] );
+	glClear( GL_COLOR_BUFFER_BIT );
+
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
 }
 
 void Display::Destroy()

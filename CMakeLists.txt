@@ -29,6 +29,7 @@ file(GLOB EngineSource
 	Aeon/Rendering/*.cpp
     Aeon/ThirdParty/*.cpp
     Aeon/ThirdParty/*.c
+    Aeon/ThirdParty/ImGui/*.cpp
 )
 
 #temp

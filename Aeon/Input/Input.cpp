@@ -6,6 +6,7 @@
 
 #include "Aeon/Core/Events.hpp"
 #include "Aeon/Input/InputMap.hpp"
+#include "Aeon/Rendering/ImGui.hpp"
 
 using Aeon::Input::Input;
 
@@ -36,6 +37,9 @@ void Input::PollInput()
     SDL_PumpEvents();
 	while ( SDL_PollEvent( &mEvent ) )
 	{
+        // Provide to non-event driven subsystem
+        ImGui_ImplSDL2_ProcessEvent( &mEvent );
+
 		switch ( mEvent.type )
 		{
 		case SDL_WINDOWEVENT:
