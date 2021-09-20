@@ -2,9 +2,11 @@
 #define AEON_AEON_H_
 
 #include <string>
+#include <vector>
 
 #include "Aeon/Core/Display.hpp"
 #include "Aeon/Core/Events.hpp"
+#include "Aeon/Core/GameLayer.hpp"
 #include "Aeon/Input/Input.hpp"
 
 namespace Aeon::Core {
@@ -15,25 +17,34 @@ namespace Aeon::Core {
 class App : public EventListener
 {
 public:
-	App( const DisplayProperties& props );
+	App( const AppProperties& props, const DisplayProperties& dispProps );
 
 	void Run();
 
-	void PushLayer();
-	void PopLayer();
-
 	const Display& GetDisplay();
+
+	void PushLayer( GameLayer layer );
+	void PushDebugLayer( GameLayer layer );
+	void PopTopLayer( GameLayer layer );
 
 	bool EventRecieved( GenericEvent& e ) override;
 
-private:
+public:
+	void PopLayer();
+	void PushTopLayer();
+	void PopDebugLayer();
 
+private:
 	Display mDisplay;
 
 	Aeon::Input::Input mInput;
 
+	// Game layers from z order
+	std::vector<GameLayer> mGameLayers;
+	std::vector<GameLayer> mTopLayers;
+	std::vector<GameLayer> mDebugLayers;
+
 private:
-	
 	bool mSIGTERM = false;
 
 };

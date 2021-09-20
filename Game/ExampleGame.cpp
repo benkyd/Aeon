@@ -12,8 +12,10 @@ public:
 
 	// take command line args better (parse them first!)
 	ExampleGame()
-		: App( { "Game with AEON!" } )
+		: App( { "Example" },  { "Game with AEON!" } )
 	{
+		GameLevel game;
+		PushLayer( game );
 		Run();
 	}
 
@@ -24,6 +26,12 @@ public:
 
 };
 
+class GameLevel : public Aeon::Core::GameLayer
+{
+public:
+
+
+};
 
 int main( int argc, char** argv )
 {
