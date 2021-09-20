@@ -60,6 +60,7 @@ bool Display::Create( const DisplayProperties& properties )
 
 	Aeon::Rendering::SetupImGui( mWindow, mContext );
 
+	// Make sure ImGUI is ready to be used on the first frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
@@ -77,7 +78,7 @@ const unsigned int Display::GetHeight()
 	return mHeight;
 }
 
-SDL_Window* Display::GetWindow()
+const SDL_Window* Display::GetWindow()
 {
 	return mWindow;
 }

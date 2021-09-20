@@ -24,7 +24,7 @@ public:
     const unsigned int GetWidth();
     const unsigned int GetHeight();
 
-    SDL_Window* GetWindow();
+    const SDL_Window* GetWindow();
     const SDL_GLContext& GetContext();
 
     void SetClearColour( float r, float g, float b, float a = 1.0f );
