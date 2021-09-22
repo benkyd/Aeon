@@ -6,6 +6,70 @@
 #include <Aeon/Aeon.hpp>
 #include <Aeon/Core/Events.hpp>
 
+class Level : public Aeon::Core::GameLayer
+{
+public:
+	Level() { }
+
+	void Attach() override
+	{
+
+	}
+
+	void FrameTick() override
+	{
+
+	}
+
+	void TimeTick() override
+	{
+
+	}
+
+	bool EventRecieved( Aeon::Core::GenericEvent& e ) override
+	{
+
+		return false;
+	}
+
+	void Detach() override
+	{
+
+	}
+};
+
+class TopLevel : public Aeon::Core::GameLayer
+{
+public:
+	TopLevel() { }
+
+	void Attach() override
+	{
+
+	}
+
+	void FrameTick() override
+	{
+
+	}
+
+	void TimeTick() override
+	{
+
+	}
+
+	bool EventRecieved( Aeon::Core::GenericEvent& e ) override
+	{
+
+		return false;
+	}
+
+	void Detach() override
+	{
+
+	}
+};
+
 class ExampleGame : public Aeon::Core::App
 {
 public:
@@ -14,22 +78,18 @@ public:
 	ExampleGame()
 		: App( { "Example" },  { "Game with AEON!" } )
 	{
-		GameLevel game;
-		PushLayer( game );
+		Level* level = new Level;
+		TopLevel* topLevel = new TopLevel;
+		PushLayer( (Aeon::Core::GameLayer*)level );
+		PushDebugLayer( (Aeon::Core::GameLayer*)topLevel );
 		Run();
+		delete level;
 	}
 
 	~ExampleGame()
 	{
 
 	}
-
-};
-
-class GameLevel : public Aeon::Core::GameLayer
-{
-public:
-
 
 };
 

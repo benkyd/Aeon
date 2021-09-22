@@ -23,15 +23,15 @@ public:
 
 	const Display& GetDisplay();
 
-	void PushLayer( GameLayer layer );
-	void PushDebugLayer( GameLayer layer );
-	void PopTopLayer( GameLayer layer );
+	void PushLayer( GameLayer* layer );
+	void PushTopLayer( GameLayer* layer );
+	void PushDebugLayer( GameLayer* layer );
 
 	bool EventRecieved( GenericEvent& e ) override;
 
 public:
 	void PopLayer();
-	void PushTopLayer();
+	void PopTopLayer();
 	void PopDebugLayer();
 
 private:
@@ -39,10 +39,10 @@ private:
 
 	Aeon::Input::Input mInput;
 
-	// Game layers from z order
-	std::vector<GameLayer> mGameLayers;
-	std::vector<GameLayer> mTopLayers;
-	std::vector<GameLayer> mDebugLayers;
+	// Game layers from z orderxko285132046
+	std::vector<GameLayer*> mGameLayers;
+	std::vector<GameLayer*> mTopLayers;
+	std::vector<GameLayer*> mDebugLayers;
 
 private:
 	bool mSIGTERM = false;

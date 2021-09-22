@@ -26,7 +26,35 @@ void App::Run()
 	{
 		mInput.PollInput();
 
-		std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
+		// std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
+
+		// tick through game layers
+		for ( const auto& layer : mGameLayers )
+		{
+			layer->FrameTick();
+		}
+		for ( const auto& layer : mTopLayers )
+		{
+			layer->FrameTick();
+		}
+		for ( const auto& layer : mDebugLayers )
+		{
+			layer->FrameTick();
+		}
+
+		// tick through game layers *but timed*
+		for ( const auto& layer : mGameLayers )
+		{
+			layer->TimeTick();
+		}
+		for ( const auto& layer : mTopLayers )
+		{
+			layer->TimeTick();
+		}
+		for ( const auto& layer : mDebugLayers )
+		{
+			layer->TimeTick();
+		}
 
 		mDisplay.EndFrame();
 	}
@@ -36,6 +64,22 @@ const Display& App::GetDisplay()
 {
 	return mDisplay;
 }
+
+void App::PushLayer( GameLayer* layer )
+{
+	mGameLayers.push_back( layer );
+}
+
+void App::PushTopLayer( GameLayer* layer )
+{
+	mTopLayers.push_back( layer );
+}
+
+void App::PushDebugLayer( GameLayer* layer )
+{
+	mDebugLayers.push_back( layer );
+}
+
 
 bool App::EventRecieved( GenericEvent& e )
 {

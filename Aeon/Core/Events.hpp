@@ -88,7 +88,7 @@ public:
 	void UpdateLayer( int layer );
 
 	// return true = event handled
-	virtual bool EventRecieved(GenericEvent& e) = 0;
+	virtual bool EventRecieved( GenericEvent& e ) = 0;
 
 private:
 	int mListenerID = -1;
