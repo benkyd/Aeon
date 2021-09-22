@@ -113,6 +113,7 @@ void Display::EndFrame()
 
 void Display::Destroy()
 {
+	Aeon::Rendering::CleanupImGui();
 	SDL_DestroyWindow( mWindow );
 	// dangly balls
 	mWindow = nullptr;

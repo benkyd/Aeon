@@ -26,6 +26,13 @@ inline void SetupImGui( const SDL_Window* window, const SDL_GLContext& context )
 	ImGui_ImplOpenGL3_Init( "#version 450" );
 }
 
+inline void CleanupImGui()
+{
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
+}
+
 }
 
 #endif

@@ -37,9 +37,6 @@ void Input::PollInput()
     SDL_PumpEvents();
 	while ( SDL_PollEvent( &mEvent ) )
 	{
-        // Provide to non-event driven subsystem
-        ImGui_ImplSDL2_ProcessEvent( &mEvent );
-
 		switch ( mEvent.type )
 		{
 		case SDL_WINDOWEVENT:
@@ -69,6 +66,8 @@ void Input::PollInput()
             mPollKeyboard();
         }
 		}
+        // Provide to non-event driven subsystem
+        ImGui_ImplSDL2_ProcessEvent( &mEvent );
 	}
 
     // just in case
