@@ -17,10 +17,32 @@ EventListener::~EventListener()
 
 }
 
-void EventListener::RegisterAsSink( std::string system, int layer )
+void EventListener::PushThisAsSink( std::string system )
 {
-	mListenerID = EventManager::GetInstance().RegisterSink( this, system );
+	mListenerID = EventManager::GetInstance().RegisterSinkPush( this, system );
 	AEON_ASSERT( mListenerID != -1, "Cannot register event sink" );
+}
+
+void EventListener::PushAndStickThisAsSink( std::string system )
+{
+	mListenerID = EventManager::GetInstance().RegisterSinkPushStick( this, system );
+	AEON_ASSERT( mListenerID != -1, "Cannot register event sink" );
+}
+
+void EventListener::UnshiftThisAsSink( std::string system )
+{
+	mListenerID = EventManager::GetInstance().RegisterSinkUnshift( this, system );
+	AEON_ASSERT( mListenerID != -1, "Cannot register event sink" );
+}
+
+void EventListener::ShiftSinkLeft( std::string forSystem )
+{
+	EventManager::GetInstance().MoveSinkLeft( this, forSystem );
+}
+
+void EventListener::ShiftSinkRight( std::string forSystem )
+{
+	EventManager::GetInstance().MoveSinkRight( this, forSystem );
 }
 
 void EventListener::DeRegisterAsSink( std::string system )
@@ -90,7 +112,7 @@ int EventManager::RegisterSource( EventDispatcher* source, std::string system )
 	return id;
 }
 
-int EventManager::RegisterSink( EventListener* sink, std::string system )
+int EventManager::RegisterSinkPush( EventListener* sink, std::string system )
 {
 	int id = mNextHeighest;
 	mListeners[id] = sink;
@@ -100,6 +122,7 @@ int EventManager::RegisterSink( EventListener* sink, std::string system )
 	{
 		std::vector<std::tuple<EventListener*, int>> v;
 		mSinks.insert( { system, v } );
+		return;
 	}
 
 	auto& sinkVector = mSinks[system];
@@ -107,6 +130,53 @@ int EventManager::RegisterSink( EventListener* sink, std::string system )
 
 	mNextHeighest++;
 	return id;
+}
+
+int EventManager::RegisterSinkPushStick( EventListener* sink, std::string system )
+{
+	int id = mNextHeighest;
+	mListeners[id] = sink;
+
+	if ( !mStickySinks.count( system ) )
+	{
+		std::vector<std::tuple<EventListener*, int>> v;
+		mStickySinks.insert( { system, v } );
+		return;
+	}
+
+	auto& sinkVector = mStickySinks[system];
+	sinkVector.push_back( { sink, id } );
+
+	mNextHeighest++;
+	return id;
+}
+
+int EventManager::RegisterSinkUnshift( EventListener* sink, std::string system )
+{
+	int id = mNextHeighest;
+	mListeners[id] = sink;
+
+	if ( !mSinks.count( system ) )
+	{
+		RegisterSinkPush( sink, system );
+		return;
+	}
+
+	auto& sinkVector = mSinks[system];
+	sinkVector.insert( sinkVector.begin(), { sink, id } );
+
+	mNextHeighest++;
+	return id;
+}
+
+void EventManager::MoveSinkLeft( EventListener* sink, std::string system )
+{
+
+}
+
+void EventManager::MoveSinkRight( EventListener* sink, std::string system )
+{
+
 }
 
 void EventManager::RemoveSource( int dispatcherID, std::string system )
@@ -122,7 +192,24 @@ void EventManager::RemoveSink( int listenerID, std::string system )
 void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 {
 	std::string targetSink = mSources[dispatcherID];
+	auto stickySinks = mStickySinks[targetSink];
 	auto sinks = mSinks[targetSink];
+
+	if ( !stickySinks.empty() )
+	{
+		for ( auto& listenerPair : stickySinks )
+		{
+			EventListener* listener = std::get<0>( listenerPair );
+			bool handled = listener->EventRecieved( e );
+			if ( handled ) e.Handled = handled;
+
+			if ( e.Handled )
+			{
+				// destroy event
+				return;
+			}
+		}
+	}
 
 	if ( sinks.empty() )
 	{
@@ -138,7 +225,7 @@ void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 		if ( e.Handled )
 		{
 			// destroy event
-			break;
+			return;
 		}
 	}
 }

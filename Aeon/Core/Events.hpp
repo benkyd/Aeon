@@ -82,13 +82,22 @@ public:
 	EventListener();
 	virtual ~EventListener();
 
-	void PushRegisterAsSink( std::string system );
-	void PushStickyRegisterAsSink( std::string system );
-	void EmplaceRegisterAsSink( std::string system );
+	// Pushes sink to the top of the listener stack
+	//	underneath the stuck listeners
+	void PushThisAsSink( std::string system );
+	// Pushes sink to the top of the listener stack
+	//	with all of the other "stuck" listeners
+	void PushAndStickThisAsSink( std::string system );
+	// Pushes sink to the bottom of the listener stack
+	void UnshiftThisAsSink( std::string system );
+
+	void ShiftSinkLeft( std::string forSystem );
+	void ShiftSinkRight( std::string forSystem );
 
 	void DeRegisterAsSink( std::string system );
 
-	// return true = event handled
+	// return true = event handled and will not be further
+	// propogated
 	virtual bool EventRecieved( GenericEvent& e ) = 0;
 
 private:
@@ -108,7 +117,7 @@ public:
 	void DeRegisterAsSource( std::string system );
 
 	void Dispatch( GenericEvent e );
-	// no data needed
+	// no data needed, listeners act on the event happening
 	void Dispatch( std::string type );
 
 private:
@@ -125,20 +134,28 @@ public:
 	~EventManager();
 
 	int RegisterSource( EventDispatcher* source, std::string system );
-	int RegisterSink( EventListener* sink, std::string system );
+
+	int RegisterSinkPush( EventListener* sink, std::string system );
+	int RegisterSinkPushStick( EventListener* sink, std::string system );
+	int RegisterSinkUnshift( EventListener* sink, std::string system );
+
+	void MoveSinkLeft( EventListener* sink, std::string system );
+	void MoveSinkRight( EventListener* sink, std::string system );
 
 	void RemoveSource( int dispatcherID, std::string system );
+	
 	void RemoveSink( int listenerID, std::string system );
 
 	void Dispatch( int dispatcherID, GenericEvent e );
 private:
 
-	// indexed by listener ID
+	// indexed by listener ID for quick lookup
 	std::map<int, const EventListener*> mListeners;
-	// indexed by dispatcher ID
+	// indexed by dispatcher ID for itteration
 	std::map<int, std::string> mSources;
-	// indexed by (sink) system ID
+	// indexed by (sink) system ID (string)
 	// their position in the vector is their layer
+	std::map<std::string, std::vector<std::tuple<EventListener*, int>>> mStickySinks;
 	std::map<std::string, std::vector<std::tuple<EventListener*, int>>> mSinks;
 
 	int mNextHeighest = 0;
