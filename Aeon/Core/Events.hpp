@@ -82,10 +82,11 @@ public:
 	EventListener();
 	virtual ~EventListener();
 
-	void RegisterAsSink( std::string system, int layer = 0 );
-	void DeRegisterAsSink( std::string system );
+	void PushRegisterAsSink( std::string system );
+	void PushStickyRegisterAsSink( std::string system );
+	void EmplaceRegisterAsSink( std::string system );
 
-	void UpdateLayer( int layer );
+	void DeRegisterAsSink( std::string system );
 
 	// return true = event handled
 	virtual bool EventRecieved( GenericEvent& e ) = 0;

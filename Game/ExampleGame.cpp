@@ -81,7 +81,7 @@ public:
 		Level* level = new Level;
 		TopLevel* topLevel = new TopLevel;
 		PushLayer( (Aeon::Core::GameLayer*)level );
-		PushDebugLayer( (Aeon::Core::GameLayer*)topLevel );
+		PushLayer( (Aeon::Core::GameLayer*)topLevel );
 		Run();
 		delete level;
 	}

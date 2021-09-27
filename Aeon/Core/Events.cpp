@@ -28,10 +28,6 @@ void EventListener::DeRegisterAsSink( std::string system )
 
 }
 
-void EventListener::UpdateLayer( int layer )
-{
-
-}
 
 
 EventDispatcher::EventDispatcher()

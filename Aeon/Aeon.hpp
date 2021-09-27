@@ -23,6 +23,8 @@ public:
 
 	const Display& GetDisplay();
 
+	// Layers, once assigned, until poped are assumed to 
+	// never change their spot in the layer hierarchy 
 	void PushLayer( GameLayer* layer );
 	void PushTopLayer( GameLayer* layer );
 	void PushDebugLayer( GameLayer* layer );

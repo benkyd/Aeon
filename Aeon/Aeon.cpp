@@ -56,6 +56,8 @@ void App::Run()
 
 		mDisplay.EndFrame();
 	}
+
+	mDisplay.Destroy();
 }
 
 const Display& App::GetDisplay()
@@ -65,6 +67,8 @@ const Display& App::GetDisplay()
 
 void App::PushLayer( GameLayer* layer )
 {
+
+
 	mGameLayers.push_back( layer );
 }
 
