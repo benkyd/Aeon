@@ -122,7 +122,7 @@ int EventManager::RegisterSinkPush( EventListener* sink, std::string system )
 	{
 		std::vector<std::tuple<EventListener*, int>> v;
 		mSinks.insert( { system, v } );
-		return;
+		return -1;
 	}
 
 	auto& sinkVector = mSinks[system];
@@ -141,7 +141,7 @@ int EventManager::RegisterSinkPushStick( EventListener* sink, std::string system
 	{
 		std::vector<std::tuple<EventListener*, int>> v;
 		mStickySinks.insert( { system, v } );
-		return;
+		return -1;
 	}
 
 	auto& sinkVector = mStickySinks[system];
@@ -158,8 +158,7 @@ int EventManager::RegisterSinkUnshift( EventListener* sink, std::string system )
 
 	if ( !mSinks.count( system ) )
 	{
-		RegisterSinkPush( sink, system );
-		return;
+		return RegisterSinkPush( sink, system );
 	}
 
 	auto& sinkVector = mSinks[system];

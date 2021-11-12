@@ -15,7 +15,7 @@ App::App( const AppProperties& props, const DisplayProperties& dispProps )
 	: mDisplay()
 	, mInput()
 {
-	RegisterAsSink( "ENGINE_DISPLAY_CORE", 0 );
+	PushThisAsSink( "ENGINE_DISPLAY_CORE" );
 
 	mDisplay.Create( dispProps );
 }

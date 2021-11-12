@@ -12,7 +12,7 @@ Display::Display()
 	, mContext( NULL )
 	, mClearColour{ 1.0f, 1.0f, 1.0f, 1.0f }
 {
-	RegisterAsSink( "ENGINE_DISPLAY_CORE", 0 );
+	PushThisAsSink( "ENGINE_DISPLAY_CORE" );
 }
 
 Display::~Display()
