@@ -147,6 +147,9 @@ public:
 	void RemoveSink( int listenerID, std::string system );
 
 	void Dispatch( int dispatcherID, GenericEvent e );
+
+	void DebugPrint();
+
 private:
 
 	// indexed by listener ID for quick lookup

@@ -117,14 +117,6 @@ int EventManager::RegisterSinkPush( EventListener* sink, std::string system )
 	int id = mNextHeighest;
 	mListeners[id] = sink;
 
-	// if there is no sinks for the system, make sure there is one
-	if ( !mSinks.count( system ) )
-	{
-		std::vector<std::tuple<EventListener*, int>> v;
-		mSinks.insert( { system, v } );
-		return -1;
-	}
-
 	auto& sinkVector = mSinks[system];
 	sinkVector.push_back( { sink, id } );
 
@@ -136,13 +128,6 @@ int EventManager::RegisterSinkPushStick( EventListener* sink, std::string system
 {
 	int id = mNextHeighest;
 	mListeners[id] = sink;
-
-	if ( !mStickySinks.count( system ) )
-	{
-		std::vector<std::tuple<EventListener*, int>> v;
-		mStickySinks.insert( { system, v } );
-		return -1;
-	}
 
 	auto& sinkVector = mStickySinks[system];
 	sinkVector.push_back( { sink, id } );
@@ -188,6 +173,35 @@ void EventManager::RemoveSink( int listenerID, std::string system )
 
 }
 
+
+// it is important to reverse the lists so that the dispatching is done correctly
+// this is more efficiently done at insert... lol
+template <typename C>
+struct reverse_wrapper {
+
+	C& c_;
+	reverse_wrapper(C& c) : c_(c) {}
+
+	typename C::reverse_iterator begin() { return c_.rbegin(); }
+	typename C::reverse_iterator end() { return c_.rend(); }
+};
+
+template <typename C, size_t N>
+struct reverse_wrapper< C[N] > {
+
+	C(&c_)[N];
+	reverse_wrapper(C(&c)[N]) : c_(c) {}
+
+	typename std::reverse_iterator<const C*> begin() { return std::rbegin(c_); }
+	typename std::reverse_iterator<const C*> end() { return std::rend(c_); }
+};
+
+
+template <typename C>
+reverse_wrapper<C> r_wrap(C& c) {
+	return reverse_wrapper<C>(c);
+}
+
 void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 {
 	std::string targetSink = mSources[dispatcherID];
@@ -196,7 +210,7 @@ void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 
 	if ( !stickySinks.empty() )
 	{
-		for ( auto& listenerPair : stickySinks )
+		for ( auto& listenerPair : r_wrap(stickySinks))
 		{
 			EventListener* listener = std::get<0>( listenerPair );
 			bool handled = listener->EventRecieved( e );
@@ -210,21 +224,37 @@ void EventManager::Dispatch( int dispatcherID, GenericEvent e )
 		}
 	}
 
-	if ( sinks.empty() )
+	if (!sinks.empty())
 	{
-		return;
-	}
-	
-	for ( auto& listenerPair : sinks )
-	{
-		EventListener* listener = std::get<0>( listenerPair );
-		bool handled = listener->EventRecieved(e);
-		if ( handled ) e.Handled = handled;
-
-		if ( e.Handled )
+		for (auto& listenerPair : r_wrap(sinks))
 		{
-			// destroy event
-			return;
+			EventListener* listener = std::get<0>(listenerPair);
+			bool handled = listener->EventRecieved(e);
+			if (handled) e.Handled = handled;
+
+			if (e.Handled)
+			{
+				// destroy event
+				return;
+			}
 		}
 	}
+	
+}
+
+void EventManager::DebugPrint()
+{
+	std::cout << "----- BEGIN EVENTS DEBUG -----" << std::endl;
+	for (auto const& [dispatcher, targetSink] : mSources)
+	{
+		auto stickySinks = mStickySinks[targetSink];
+		auto sinks = mSinks[targetSink];
+
+		int sourceCount = 0;
+		for (auto const& [id, source] : mSources)
+			if (source == targetSink) sourceCount++;
+
+		std::cout << targetSink << " has " << stickySinks.size() << " sticky and " << sinks.size() << " sink(s) and is being dispatched from " << sourceCount << " different source(s)" << std::endl;
+	}
+	std::cout << "----- END EVENTS DEBUG -----" << std::endl;
 }
