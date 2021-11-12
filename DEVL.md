@@ -15,3 +15,7 @@ For milestones see the project notion page [here](https://www.notion.so/Aeon-e34
  * Development restarts
  * Issue with SDL2 Resolved as well as the broken shit in d69b6af is fixed
  * Issue with sinks not registering ID's properly persists
+ * Events are complete for the time being
+ * Notable Commits
+	* b1f79f4 - Events done
+ * Last daily commit b1f79f4
