@@ -226,24 +226,25 @@ void Input::mPollKeyboard()
     {
         e.Type = "KEYBOARD_KEYUP";
     }
+    std::cout << e.keyCode << " " << mEvent.key.keysym.sym << std::endl;
     mKeyboardEventDispatcher.Dispatch( e );
 }
 
 void Input::mPollScanKeyboard()
 {
     // this is naive, can be optimised with double buffering
-    for ( int i = 0; i < mNumScancodes; i++ )
-    {
-        bool isKeyPressed = (bool)mKbdState[i];
-        if ( isKeyPressed )
-        {
-            EKeyCode whatKeyPressed = KeyCodeFromScanCode( (SDL_Scancode)i );
+    // for ( int i = 0; i < mNumScancodes; i++ )
+    // {
+    //     bool isKeyPressed = (bool)mKbdState[i];
+    //     if ( isKeyPressed )
+    //     {
+    //         EKeyCode whatKeyPressed = KeyCodeFromScanCode( (SDL_Scancode)i );
 
-            Aeon::Core::GenericEvent e;
-            e.keyCode = whatKeyPressed;
-            e.Type = "KEYBOARD_KEYPRESS";
+    //         Aeon::Core::GenericEvent e;
+    //         e.keyCode = whatKeyPressed;
+    //         e.Type = "KEYBOARD_KEYPRESS";
 
-            mKeyboardEventDispatcher.Dispatch( e );
-        }
-    }
+    //         mKeyboardEventDispatcher.Dispatch( e );
+    //     }
+    // }
 }
