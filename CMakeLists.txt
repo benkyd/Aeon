@@ -11,6 +11,7 @@ set(THREADS_PREFER_PTHREAD_FLAD ON)
 find_package(Threads REQUIRED)
 
 # Find GL and GLX package
+set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
 

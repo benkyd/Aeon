@@ -24,6 +24,7 @@ void App::Run()
 {
 	while ( !mSIGTERM )
 	{
+		// Should do this ONLY on update
 		mInput.PollInput();
 
 		// tick through game layers
@@ -41,6 +42,7 @@ void App::Run()
 		}
 
 		// tick through game layers *but timed*
+		// TODO: Timed event thread (won't allow rendering)
 		for ( const auto& layer : mGameLayers )
 		{
 			layer->TimeTick();
