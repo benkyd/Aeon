@@ -6,6 +6,22 @@
 namespace Aeon::Input
 {
 
+enum EModCode {
+    LCTRL = 0x40,
+    RCTRL = 0x80,
+    LSHIFT = 0x1,
+    RSHIFT = 0x2,
+    LALT = 0x100,
+    RALT = 0x200,
+    LGUI = 0x400,
+    RGUI = 0x800,
+
+    CTRL = LCTRL | RCTRL,
+    SHIFT = LSHIFT | RSHIFT,
+    ALT = LALT | RALT,
+    GUI = LGUI | RGUI
+};
+
 enum EKeyCode
 {
     Unknown = 0,
@@ -153,19 +169,14 @@ enum EKeyCode
     KeyPad_Space = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_KP_SPACE ),
     KeyPad_At = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_KP_AT ),
 
-    LCTRL = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LCTRL ),
-    RCTRL = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RCTRL ),
-    LSHIFT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LSHIFT ),
-    RSHIFT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RSHIFT ),
-    LALT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LALT ),
-    RALT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RALT ),
-    LGUI = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LGUI ),
-    RGUI = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RGUI ),
-
-    CTRL = LCTRL | RCTRL,
-    SHIFT = LSHIFT | RSHIFT,
-    ALT = LALT | RALT,
-    GUI = LGUI | RGUI
+    LeftCTRL = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LCTRL ),
+    RightCTRL = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RCTRL ),
+    LeftSHIFT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LSHIFT ),
+    RightSHIFT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RSHIFT ),
+    LeftALT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LALT ),
+    RightALT = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RALT ),
+    LeftGUI = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_LGUI ),
+    RightGUI = SDL_SCANCODE_TO_KEYCODE( SDL_SCANCODE_RGUI ),
 };
 
 inline EKeyCode KeyCodeFromSDL( SDL_Keycode key )
@@ -176,54 +187,6 @@ inline EKeyCode KeyCodeFromSDL( SDL_Keycode key )
 inline EKeyCode KeyCodeFromScanCode( SDL_Scancode key )
 {
     return KeyCodeFromSDL( SDL_GetKeyFromScancode( key ) );
-}
-
-inline EKeyCode KeyCodeFromKeymod( SDL_Keymod key )
-{
-    switch ( key )
-    {
-    case KMOD_NONE:
-        return EKeyCode::Unknown;
-        break;
-    case KMOD_LSHIFT:
-        return EKeyCode::LSHIFT;
-        break;
-    case KMOD_RSHIFT:
-        return EKeyCode::RSHIFT;
-        break;
-    case KMOD_LCTRL:
-        return EKeyCode::LCTRL;
-        break;
-    case KMOD_RCTRL:
-        return EKeyCode::RCTRL;
-        break;
-    case KMOD_LALT:
-        return EKeyCode::LALT;
-        break;
-    case KMOD_RALT:
-        return EKeyCode::RALT;
-        break;
-    case KMOD_LGUI:
-        return EKeyCode::LGUI;
-        break;
-    case KMOD_RGUI:
-        return EKeyCode::RGUI;
-        break;
-    case KMOD_CTRL:
-        return EKeyCode::CTRL;
-        break;
-    case KMOD_SHIFT:
-        return EKeyCode::SHIFT;
-        break;
-    case KMOD_ALT:
-        return EKeyCode::ALT;
-        break;
-    case KMOD_GUI:
-        return EKeyCode::GUI;
-        break;
-    default:
-        return EKeyCode::Unknown;
-    }
 }
 
 }

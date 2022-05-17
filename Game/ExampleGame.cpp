@@ -35,7 +35,8 @@ public:
 
 	bool EventRecieved( Aeon::Core::GenericEvent& e ) override
 	{
-		std::cout << "FROM LEVEL " << e.System << " " << (char)e.keyCode << std::endl;
+		std::cout << "FROM LEVEL " << e.Type << " " << (char)e.keyCode << std::endl;
+
 		return false;
 	}
 

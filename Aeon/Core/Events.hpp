@@ -52,7 +52,7 @@ namespace Aeon::Core {
 *	MOUSE_SCROLL			- y+-
 *	MOUSE_MOVE				- move to x, y relative dx, dy
 * ENGINE_INPUT_KEYBOARD
-*	KEYBOARD_KEYDOWN		- keycode
+*	KEYBOARD_KEYDOWN		- keycode 
 *	KEYBOARD_KEYUP			- keycode
 *	KEYBOARD_KEYPRESS		- keycode for continual pressing
 */
@@ -60,18 +60,22 @@ namespace Aeon::Core {
 
 struct GenericEvent
 {
+	// always populated
 	std::string System;
 	std::string Type;
 	
 	// the rest can be empty
 	// user defined
 	std::string Data;
+
 	// DISPLAY_RESIZE DISPLAY_MOVE MOUSE_MOVE
 	int x, y;
 	// MOUSE_MOVE
 	int dx, dy;
+	
 	// KEYBOARD_KEYDOWN KEYBOARD_KEYUP KEYBOARD_PRESSED
 	Aeon::Input::EKeyCode keyCode;
+	uint16_t keyMods;
 
 	bool Handled = false;
 };

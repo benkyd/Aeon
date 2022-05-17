@@ -3,6 +3,8 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
+#include <bitset>
+#include <iomanip>
 
 #include "Aeon/Core/Events.hpp"
 #include "Aeon/Input/InputMap.hpp"
@@ -217,7 +219,7 @@ void Input::mPollKeyboard()
 {
     EKeyCode keycode = KeyCodeFromSDL( mEvent.key.keysym.sym );
     Aeon::Core::GenericEvent e;
-    e.keyCode = keycode;
+    e.keyCode = KeyCodeFromSDL(keycode);
     if ( mEvent.key.state == SDL_PRESSED )
     {
         e.Type = "KEYBOARD_KEYDOWN";
@@ -226,7 +228,10 @@ void Input::mPollKeyboard()
     {
         e.Type = "KEYBOARD_KEYUP";
     }
-    std::cout << e.keyCode << " " << mEvent.key.keysym.sym << std::endl;
+    
+    uint16_t mods = mEvent.key.keysym.mod;
+    e.keyMods = mods;
+
     mKeyboardEventDispatcher.Dispatch( e );
 }
 
