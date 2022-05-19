@@ -52,9 +52,9 @@ namespace Aeon::Core {
 *	MOUSE_SCROLL			- y+-
 *	MOUSE_MOVE				- move to x, y relative dx, dy
 * ENGINE_INPUT_KEYBOARD
-*	KEYBOARD_KEYDOWN		- keycode 
-*	KEYBOARD_KEYUP			- keycode
-*	KEYBOARD_KEYPRESS		- keycode for continual pressing
+*	KEYBOARD_KEYDOWN		- keycode, keymod
+*	KEYBOARD_KEYUP			- keycode, keymod
+*	KEYBOARD_KEYPRESS		- keycode for continual pressing, keymod
 */
 
 

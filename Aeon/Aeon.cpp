@@ -24,7 +24,7 @@ void App::Run()
 {
 	while ( !mSIGTERM )
 	{
-		// Should do this ONLY on update
+		// Should do this ONLY on update (but needs to be on main thread)
 		mInput.PollInput();
 
 		// tick through game layers
@@ -69,8 +69,6 @@ const Display& App::GetDisplay()
 
 void App::PushLayer( GameLayer* layer )
 {
-
-
 	mGameLayers.push_back( layer );
 }
 

@@ -232,24 +232,26 @@ void Input::mPollKeyboard()
     uint16_t mods = mEvent.key.keysym.mod;
     e.keyMods = mods;
 
+    mModKeyState = mods;
+
     mKeyboardEventDispatcher.Dispatch( e );
 }
 
 void Input::mPollScanKeyboard()
 {
-    // this is naive, can be optimised with double buffering
-    // for ( int i = 0; i < mNumScancodes; i++ )
-    // {
-    //     bool isKeyPressed = (bool)mKbdState[i];
-    //     if ( isKeyPressed )
-    //     {
-    //         EKeyCode whatKeyPressed = KeyCodeFromScanCode( (SDL_Scancode)i );
+    //this is naive, can be optimised with double buffering
+    for ( int i = 0; i < mNumScancodes; i++ )
+    {
+        bool isKeyPressed = (bool)mKbdState[i];
+        if ( isKeyPressed )
+        {
+            EKeyCode whatKeyPressed = KeyCodeFromScanCode( (SDL_Scancode)i );
 
-    //         Aeon::Core::GenericEvent e;
-    //         e.keyCode = whatKeyPressed;
-    //         e.Type = "KEYBOARD_KEYPRESS";
-
-    //         mKeyboardEventDispatcher.Dispatch( e );
-    //     }
-    // }
+            Aeon::Core::GenericEvent e;
+            e.keyCode = whatKeyPressed;
+            e.keyMods = mModKeyState;
+            e.Type = "KEYBOARD_KEYPRESS";
+            mKeyboardEventDispatcher.Dispatch( e );
+        }
+    }
 }

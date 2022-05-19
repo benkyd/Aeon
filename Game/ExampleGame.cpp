@@ -1,6 +1,3 @@
-// simple raycast shooter
-// shotgun fun fun yanno
-
 #include <iostream>
 
 #include <Aeon/Aeon.hpp>
@@ -37,6 +34,10 @@ public:
 	{
 		std::cout << "FROM LEVEL " << e.Type << " " << (char)e.keyCode << std::endl;
 
+		if ( e.keyMods & Aeon::Input::EModCode::SHIFT ) {
+			std::cout << "Shift" << std::endl;
+		}
+
 		return false;
 	}
 
@@ -49,8 +50,6 @@ public:
 class ExampleGame : public Aeon::Core::App
 {
 public:
-
-	// take command line args better (parse them first!)
 	ExampleGame()
 		: App( { "Example" },  { "Game with AEON!" } )
 	{
