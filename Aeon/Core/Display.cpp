@@ -5,7 +5,7 @@
 #include "Aeon/Assert.hpp"
 #include "Aeon/Rendering/ImGui.hpp"
 
-using Aeon::Core::Display;
+using Core::Display;
 
 Display::Display()
 	: mWindow( nullptr )
@@ -58,7 +58,7 @@ bool Display::Create( const DisplayProperties& properties )
 	mWidth = properties.Width;
 	mHeight = properties.Height;
 
-	Aeon::Rendering::SetupImGui( mWindow, mContext );
+	Rendering::SetupImGui( mWindow, mContext );
 
 	// Make sure ImGUI is ready to be used on the first frame
 	ImGui_ImplOpenGL3_NewFrame();
@@ -113,7 +113,7 @@ void Display::EndFrame()
 
 void Display::Destroy()
 {
-	Aeon::Rendering::CleanupImGui();
+	Rendering::CleanupImGui();
 	SDL_DestroyWindow( mWindow );
 	// dangly balls
 	mWindow = nullptr;

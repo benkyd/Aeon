@@ -9,7 +9,7 @@
 #include "Aeon/Core/GameLayer.hpp"
 #include "Aeon/Input/Input.hpp"
 
-namespace Aeon::Core {
+namespace Core {
 
 // NOTE: Derivations / children of "App" cannot attatch
 // event listeners to themselves, the programmer must
@@ -39,7 +39,7 @@ public:
 private:
 	Display mDisplay;
 
-	Aeon::Input::Input mInput;
+	Input mInput;
 
 	// Game layers from z orderxko285132046
 	std::vector<GameLayer*> mGameLayers;

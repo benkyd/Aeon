@@ -3,7 +3,7 @@
 
 #include "Aeon/Core/Events.hpp"
 
-namespace Aeon::Core
+namespace Core
 {
 
 class GameLayer : public EventListener

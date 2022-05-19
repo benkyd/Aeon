@@ -12,7 +12,7 @@ extern "C" {
 #include <Aeon/ThirdParty/ImGui/imgui_impl_sdl.h>
 #include <Aeon/ThirdParty/ImGui/imgui_impl_opengl3.h>
 
-namespace Aeon::Rendering
+namespace Rendering
 {
 
 inline void SetupImGui( const SDL_Window* window, const SDL_GLContext& context )

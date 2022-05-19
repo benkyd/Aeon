@@ -22,7 +22,7 @@
 #include "Aeon/Singleton.hpp"
 #include "Aeon/Input/InputMap.hpp"
 
-namespace Aeon::Core {
+namespace Core {
 
 /*
 * Engine event systems / type
@@ -74,7 +74,7 @@ struct GenericEvent
 	int dx, dy;
 	
 	// KEYBOARD_KEYDOWN KEYBOARD_KEYUP KEYBOARD_PRESSED
-	Aeon::Input::EKeyCode keyCode;
+	Input::EKeyCode keyCode;
 	uint16_t keyMods;
 
 	bool Handled = false;
@@ -131,7 +131,7 @@ private:
 	friend class EventManager;
 };
 
-class EventManager : public Aeon::Helpers::Singleton<EventManager>
+class EventManager : public Helpers::Singleton<EventManager>
 {
 public:
 	EventManager();

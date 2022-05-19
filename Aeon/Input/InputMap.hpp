@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 
-namespace Aeon::Input
+namespace Input
 {
 
 enum EModCode {

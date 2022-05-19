@@ -10,7 +10,7 @@
 #include "Aeon/Input/InputMap.hpp"
 #include "Aeon/Rendering/ImGui.hpp"
 
-using Aeon::Input::Input;
+using Input::Input;
 
 Input::Input()
 	: mEvent()
@@ -96,7 +96,7 @@ void Input::mPollDisplay()
     }
     case SDL_WINDOWEVENT_MOVED:
     {
-        Aeon::Core::GenericEvent e;
+        Core::GenericEvent e;
         e.x = mEvent.window.data1;
         e.y = mEvent.window.data2;
         e.Type = "DISPLAY_MOVE";
@@ -105,7 +105,7 @@ void Input::mPollDisplay()
     }
     case SDL_WINDOWEVENT_RESIZED:
     {
-        Aeon::Core::GenericEvent e;
+        Core::GenericEvent e;
         e.x = mEvent.window.data1;
         e.y = mEvent.window.data2;
         e.Type = "DISPLAY_RESIZE";
@@ -152,7 +152,7 @@ void Input::mPollDisplay()
 
 void Input::mPollMouse()
 {
-    Aeon::Core::GenericEvent e;
+    Core::GenericEvent e;
     e.x = mEvent.motion.x;
     e.y = mEvent.motion.y;
     e.dx = mEvent.motion.xrel;
@@ -163,7 +163,7 @@ void Input::mPollMouse()
 
 void Input::mPollScroll()
 {
-    Aeon::Core::GenericEvent e;
+    Core::GenericEvent e;
     e.y = mEvent.wheel.y;
     e.Type = "MOUSE_SCROLL";
     mMouseEventDispatcher.Dispatch( e );
@@ -218,7 +218,7 @@ void Input::mPollClick()
 void Input::mPollKeyboard()
 {
     EKeyCode keycode = KeyCodeFromSDL( mEvent.key.keysym.sym );
-    Aeon::Core::GenericEvent e;
+    Core::GenericEvent e;
     e.keyCode = KeyCodeFromSDL(keycode);
     if ( mEvent.key.state == SDL_PRESSED )
     {
@@ -247,7 +247,7 @@ void Input::mPollScanKeyboard()
         {
             EKeyCode whatKeyPressed = KeyCodeFromScanCode( (SDL_Scancode)i );
 
-            Aeon::Core::GenericEvent e;
+            Core::GenericEvent e;
             e.keyCode = whatKeyPressed;
             e.keyMods = mModKeyState;
             e.Type = "KEYBOARD_KEYPRESS";

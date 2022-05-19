@@ -1,7 +1,7 @@
 #ifndef AEON_CORE_ENGINECONFIG_H_
 #define AEON_CORE_ENGINECONFIG_H_
 
-namespace Aeon::Core
+namespace Core
 {
 
 // TODO: this

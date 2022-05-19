@@ -8,7 +8,7 @@
 #include "Aeon/Singleton.hpp"
 #include "Aeon/Core/Events.hpp"
 
-namespace Aeon::Input {
+namespace Input {
 
 class Input
 {
@@ -33,9 +33,9 @@ private:
 	const uint8_t* mKbdState;
 	uint16_t mModKeyState = 0x0;
 
-	Aeon::Core::EventDispatcher mDisplayEventDispatcher;
-	Aeon::Core::EventDispatcher mKeyboardEventDispatcher;
-	Aeon::Core::EventDispatcher mMouseEventDispatcher;
+	Core::EventDispatcher mDisplayEventDispatcher;
+	Core::EventDispatcher mKeyboardEventDispatcher;
+	Core::EventDispatcher mMouseEventDispatcher;
 };
 
 }

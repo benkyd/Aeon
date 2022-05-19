@@ -5,11 +5,11 @@
 
 #include "Aeon/Rendering/ImGui.hpp"
 
-using Aeon::Core::App;
-using Aeon::Core::Display;
-using Aeon::Core::DisplayProperties;
+using Core::App;
+using Core::Display;
+using Core::DisplayProperties;
 
-using Aeon::Input::Input;
+using Input::Input;
 
 App::App( const AppProperties& props, const DisplayProperties& dispProps )
 	: mDisplay()

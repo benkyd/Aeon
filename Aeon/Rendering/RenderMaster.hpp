@@ -3,10 +3,10 @@
 
 #include "Aeon/Singleton.hpp"
 
-namespace Aeon::Rendering
+namespace Rendering
 {
 
-class RenderMaster : public Aeon::Helpers::Singleton<RenderMaster>
+class RenderMaster : public Helpers::Singleton<RenderMaster>
 {
 
 };

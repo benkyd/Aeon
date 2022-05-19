@@ -2,10 +2,10 @@
 
 #include "Aeon/Assert.hpp"
 
-using Aeon::Core::GenericEvent;
-using Aeon::Core::EventListener;
-using Aeon::Core::EventDispatcher;
-using Aeon::Core::EventManager;
+using Core::GenericEvent;
+using Core::EventListener;
+using Core::EventDispatcher;
+using Core::EventManager;
 
 EventListener::EventListener()
 {

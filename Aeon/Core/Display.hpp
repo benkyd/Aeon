@@ -11,7 +11,9 @@ extern "C" {
 #include "Aeon/Core/EngineConfig.hpp"
 #include "Aeon/Core/Events.hpp"
 
-namespace Aeon::Core {
+class Rendering::Rendermaster;
+
+namespace Core {
 
 class Display : public EventListener
 {
@@ -38,6 +40,8 @@ public:
 private:
     SDL_Window* mWindow;
     SDL_GLContext mContext;
+
+
 
     unsigned int mWidth, mHeight;
     unsigned int mX, mY;
