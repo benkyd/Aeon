@@ -24,6 +24,9 @@
 
 namespace Core {
 
+// THis needs some redesigning so i can do this.AttachSpecificListener(Type, Action, [&] => {...})
+// More specifically to support enumerator calling AND custom defined string calling
+// Maybe through a reserved enumeration map 0-100: system etc..
 /*
 * Engine event systems / type
 * ENGINE_SYSTEM_CORE	- start, stop, pause, etc

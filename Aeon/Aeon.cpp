@@ -9,11 +9,11 @@ using Core::App;
 using Core::Display;
 using Core::DisplayProperties;
 
-using Input::Input;
+using Input::InputController;
 
 App::App( const AppProperties& props, const DisplayProperties& dispProps )
 	: mDisplay()
-	, mInput()
+	, mInput(InputController::GetInstance())
 {
 	PushThisAsSink( "ENGINE_DISPLAY_CORE" );
 

@@ -11,7 +11,8 @@ extern "C" {
 #include "Aeon/Core/EngineConfig.hpp"
 #include "Aeon/Core/Events.hpp"
 
-class Rendering::Rendermaster;
+namespace Rendering { class RenderMaster; }
+using namespace Rendering;
 
 namespace Core {
 
@@ -41,10 +42,10 @@ private:
     SDL_Window* mWindow;
     SDL_GLContext mContext;
 
+    RenderMaster& mRenderer;
 
-
-    unsigned int mWidth, mHeight;
-    unsigned int mX, mY;
+    unsigned int mWidth, mHeight = 0;
+    unsigned int mX, mY = 0;
     float mClearColour[4];
 
 private:

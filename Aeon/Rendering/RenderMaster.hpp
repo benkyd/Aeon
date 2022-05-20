@@ -6,9 +6,13 @@
 namespace Rendering
 {
 
+class Renderable;
+
 class RenderMaster : public Helpers::Singleton<RenderMaster>
 {
+	RenderMaster();
 
+	void QueueRenderable( Renderable* renderable );
 };
 
 }

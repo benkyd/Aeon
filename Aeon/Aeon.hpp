@@ -39,7 +39,7 @@ public:
 private:
 	Display mDisplay;
 
-	Input mInput;
+	Input::InputController& mInput;
 
 	// Game layers from z orderxko285132046
 	std::vector<GameLayer*> mGameLayers;

@@ -10,11 +10,11 @@
 
 namespace Input {
 
-class Input
+class InputController : public Helpers::Singleton<InputController>
 {
 public:
-	Input();
-	~Input();
+	InputController();
+	~InputController();
 
 	void PollInput();
 

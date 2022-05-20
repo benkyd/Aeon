@@ -10,9 +10,9 @@
 #include "Aeon/Input/InputMap.hpp"
 #include "Aeon/Rendering/ImGui.hpp"
 
-using Input::Input;
+using Input::InputController;
 
-Input::Input()
+InputController::InputController()
 	: mEvent()
     , mDisplayEventDispatcher()
     , mKeyboardEventDispatcher()
@@ -25,7 +25,7 @@ Input::Input()
     mKbdState = static_cast<const uint8_t*>(SDL_GetKeyboardState( &mNumScancodes ));
 }
 
-Input::~Input()
+InputController::~InputController()
 {
     mDisplayEventDispatcher.DeRegisterAsSource( "ENGINE_DISPLAY_CORE" );
     mMouseEventDispatcher.DeRegisterAsSource( "ENGINE_INPUT_MOUSE" );
@@ -34,7 +34,7 @@ Input::~Input()
     // Do not free mKbdState as that is done by SDL
 }
 
-void Input::PollInput()
+void InputController::PollInput()
 {
     //SDL_PumpEvents();
 	while ( SDL_PollEvent( &mEvent ) )
@@ -80,7 +80,7 @@ void Input::PollInput()
     mPollScanKeyboard();
 }
 
-void Input::mPollDisplay()
+void InputController::mPollDisplay()
 {
     switch ( mEvent.window.event )
     {
@@ -150,7 +150,7 @@ void Input::mPollDisplay()
     }
 }
 
-void Input::mPollMouse()
+void InputController::mPollMouse()
 {
     Core::GenericEvent e;
     e.x = mEvent.motion.x;
@@ -161,7 +161,7 @@ void Input::mPollMouse()
     mMouseEventDispatcher.Dispatch( e );
 }
 
-void Input::mPollScroll()
+void InputController::mPollScroll()
 {
     Core::GenericEvent e;
     e.y = mEvent.wheel.y;
@@ -169,7 +169,7 @@ void Input::mPollScroll()
     mMouseEventDispatcher.Dispatch( e );
 }
 
-void Input::mPollClick()
+void InputController::mPollClick()
 {
     if ( mEvent.button.state == SDL_PRESSED )
     {
@@ -215,7 +215,7 @@ void Input::mPollClick()
     }
 }
 
-void Input::mPollKeyboard()
+void InputController::mPollKeyboard()
 {
     EKeyCode keycode = KeyCodeFromSDL( mEvent.key.keysym.sym );
     Core::GenericEvent e;
@@ -237,7 +237,7 @@ void Input::mPollKeyboard()
     mKeyboardEventDispatcher.Dispatch( e );
 }
 
-void Input::mPollScanKeyboard()
+void InputController::mPollScanKeyboard()
 {
     //this is naive, can be optimised with double buffering
     for ( int i = 0; i < mNumScancodes; i++ )

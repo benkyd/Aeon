@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Aeon/Assert.hpp"
+#include "Aeon/Rendering/RenderMaster.hpp"
 #include "Aeon/Rendering/ImGui.hpp"
 
 using Core::Display;
@@ -10,6 +11,7 @@ using Core::Display;
 Display::Display()
 	: mWindow( nullptr )
 	, mContext( NULL )
+	, mRenderer( Rendering::RenderMaster::GetInstance() )
 	, mClearColour{ 1.0f, 1.0f, 1.0f, 1.0f }
 {
 	PushThisAsSink( "ENGINE_DISPLAY_CORE" );

@@ -2,6 +2,7 @@
 
 #include <Aeon/Aeon.hpp>
 #include <Aeon/Core/Events.hpp>
+#include <Aeon/Rendering/ImGui.hpp>
 
 class BackgroundLevel : public Core::GameLayer {
 
@@ -23,6 +24,9 @@ public:
 	void FrameTick() override
 	{
 
+
+
+
 	}
 
 	void TimeTick() override
@@ -32,7 +36,44 @@ public:
 
 	bool EventRecieved( Core::GenericEvent& e ) override
 	{
+		return false;
+	}
 
+	void Detach() override
+	{
+
+	}
+};
+
+class DebugLayer : public Core::GameLayer 
+{
+public:
+	DebugLayer() 
+	{
+	
+	}
+
+	void Attach() override
+	{
+
+	}
+
+	void FrameTick() override
+	{
+
+		ImGui::Begin( "Debug" );
+
+		ImGui::End();
+
+	}
+
+	void TimeTick() override
+	{
+
+	}
+
+	bool EventRecieved( Core::GenericEvent& e ) override
+	{
 		return false;
 	}
 
@@ -50,6 +91,8 @@ public:
 	{
 		Level* level = new Level;
 		PushLayer( (Core::GameLayer*)level );
+		DebugLayer* debug = new DebugLayer;
+		PushDebugLayer( debug );
 		Run();
 		delete level;
 	}
