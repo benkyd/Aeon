@@ -1,13 +1,13 @@
 #include "Aeon/Rendering/RenderMaster.hpp"
 
-using Rendering;
+using namespace Rendering;
 
 RenderMaster::RenderMaster() 
 {
 
 }
 
-void RenderMaster::QueueRenderable() 
+void RenderMaster::QueueRenderable( Renderable* renderable )
 {
 
 }

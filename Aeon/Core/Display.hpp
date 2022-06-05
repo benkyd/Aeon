@@ -8,10 +8,11 @@ extern "C" {
 #include <ThirdParty/glad.h>
 }
 
+#include "Aeon/Rendering/RenderMaster.hpp"
+
 #include "Aeon/Core/EngineConfig.hpp"
 #include "Aeon/Core/Events.hpp"
 
-namespace Rendering { class RenderMaster; }
 using namespace Rendering;
 
 namespace Core {

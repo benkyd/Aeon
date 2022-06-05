@@ -3,17 +3,19 @@
 
 #include "Aeon/Singleton.hpp"
 
+class Renderable;
+
 namespace Rendering
 {
 
-class Renderable;
-
-class RenderMaster : public Helpers::Singleton<RenderMaster>
+class RenderMaster : public Helpers::Singleton<Rendering::RenderMaster>
 {
+public:
 	RenderMaster();
 
 	void QueueRenderable( Renderable* renderable );
 };
+
 
 }
 
