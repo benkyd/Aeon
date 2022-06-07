@@ -1,7 +1,8 @@
 #ifndef AEON_SINGLETON_H_
 #define AEON_SINGLETON_H_
 
-namespace Helpers {
+namespace Helpers 
+{
 
 template <class T>
 class Singleton

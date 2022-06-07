@@ -7,6 +7,9 @@ using Core::EventListener;
 using Core::EventDispatcher;
 using Core::EventManager;
 
+// TODO: Events should use pre-allocated memory ALWAYS!
+// TODO: Look into Bump Allocation
+
 EventListener::EventListener()
 {
 

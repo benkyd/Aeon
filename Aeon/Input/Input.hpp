@@ -8,7 +8,8 @@
 #include "Aeon/Singleton.hpp"
 #include "Aeon/Core/Events.hpp"
 
-namespace Input {
+namespace Input 
+{
 
 class InputController : public Helpers::Singleton<InputController>
 {

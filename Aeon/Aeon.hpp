@@ -9,11 +9,16 @@
 #include "Aeon/Core/GameLayer.hpp"
 #include "Aeon/Input/Input.hpp"
 
-namespace Core {
+namespace Core 
+{
 
 // NOTE: Derivations / children of "App" cannot attatch
 // event listeners to themselves, the programmer must
 // first add a gamelayer to handle events
+
+// App stores the GLOBAL gamestate
+// It is OK to store this globally 
+// every component needs to use state
 class App : public EventListener
 {
 public:

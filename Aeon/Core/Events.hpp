@@ -22,7 +22,8 @@
 #include "Aeon/Singleton.hpp"
 #include "Aeon/Input/InputMap.hpp"
 
-namespace Core {
+namespace Core 
+{
 
 // THis needs some redesigning so i can do this.AttachSpecificListener(Type, Action, [&] => {...})
 // More specifically to support enumerator calling AND custom defined string calling
