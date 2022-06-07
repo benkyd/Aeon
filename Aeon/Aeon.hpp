@@ -1,13 +1,12 @@
 #ifndef AEON_AEON_H_
 #define AEON_AEON_H_
 
-#include <string>
-#include <vector>
+#include <Aeon/Includes.hpp>
 
-#include "Aeon/Core/Display.hpp"
-#include "Aeon/Core/Events.hpp"
-#include "Aeon/Core/GameLayer.hpp"
-#include "Aeon/Input/Input.hpp"
+#include <Aeon/Core/Display.hpp>
+#include <Aeon/Core/Events.hpp>
+#include <Aeon/Core/GameLayer.hpp>
+#include <Aeon/Input/Input.hpp>
 
 namespace Core 
 {

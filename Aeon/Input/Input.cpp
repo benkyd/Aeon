@@ -1,14 +1,10 @@
-#include "Aeon/Input/Input.hpp"
+#include "Input.hpp"
 
-#include <iostream>
-#include <algorithm>
-#include <iterator>
-#include <bitset>
-#include <iomanip>
+#include <Aeon/Includes.hpp>
 
-#include "Aeon/Core/Events.hpp"
-#include "Aeon/Input/InputMap.hpp"
-#include "Aeon/Rendering/ImGui.hpp"
+#include <Aeon/Core/Events.hpp>
+#include <Aeon/Input/InputMap.hpp>
+#include <Aeon/Rendering/ImGui.hpp>
 
 using Input::InputController;
 

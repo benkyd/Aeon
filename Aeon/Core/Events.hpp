@@ -14,13 +14,10 @@
 	- Events are blocking for now
 */
 
-#include <string>
-#include <tuple>
-#include <vector>
-#include <map>
+#include <Aeon/Includes.hpp>
 
-#include "Aeon/Singleton.hpp"
-#include "Aeon/Input/InputMap.hpp"
+#include <Aeon/Singleton.hpp>
+#include <Aeon/Input/InputMap.hpp>
 
 namespace Core 
 {

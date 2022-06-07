@@ -1,7 +1,7 @@
 #ifndef AEON_CORE_GAMELAYER_H_
 #define AEON_CORE_GAMELAYER_H_
 
-#include "Aeon/Core/Events.hpp"
+#include <Aeon/Core/Events.hpp>
 
 namespace Core
 {

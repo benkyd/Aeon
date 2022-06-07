@@ -3,4 +3,6 @@
 
 #include <Aeon/ThirdParty/glm/glm.hpp>
 
+// Need hashing function for vectors and shit
+
 #endif

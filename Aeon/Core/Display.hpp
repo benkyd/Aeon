@@ -1,17 +1,11 @@
 #ifndef AEON_CORE_DISPLAY_H_
 #define AEON_CORE_DISPLAY_H_
 
-#include <string>
+#include <Aeon/Includes.hpp>
 
-#include <SDL.h>
-extern "C" {
-#include <ThirdParty/glad.h>
-}
-
-#include "Aeon/Rendering/RenderMaster.hpp"
-
-#include "Aeon/Core/EngineConfig.hpp"
-#include "Aeon/Core/Events.hpp"
+#include <Aeon/Rendering/RenderMaster.hpp>
+#include <Aeon/Core/EngineConfig.hpp>
+#include <Aeon/Core/Events.hpp>
 
 using namespace Rendering;
 

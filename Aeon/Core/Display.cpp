@@ -1,10 +1,10 @@
-#include "Aeon/Core/Display.hpp"
+#include "Display.hpp"
 
-#include <iostream>
+#include <Aeon/Includes.hpp>
 
-#include "Aeon/Assert.hpp"
-#include "Aeon/Rendering/RenderMaster.hpp"
-#include "Aeon/Rendering/ImGui.hpp"
+#include <Aeon/Assert.hpp>
+#include <Aeon/Rendering/RenderMaster.hpp>
+#include <Aeon/Rendering/ImGui.hpp>
 
 using Core::Display;
 

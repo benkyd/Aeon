@@ -1,4 +1,4 @@
-#include "Aeon/Rendering/RenderMaster.hpp"
+#include "RenderMaster.hpp"
 
 using namespace Rendering;
 

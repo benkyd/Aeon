@@ -1,9 +1,8 @@
-#include "Aeon/Aeon.hpp"
+#include "Aeon.hpp"
 
-#include <iostream>
-#include <thread>
+#include <Aeon/Includes.hpp>
 
-#include "Aeon/Rendering/ImGui.hpp"
+#include <Aeon/Rendering/ImGui.hpp>
 
 using Core::App;
 using Core::Display;

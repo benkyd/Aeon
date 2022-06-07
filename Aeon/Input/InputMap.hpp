@@ -1,7 +1,7 @@
 #ifndef AEON_INPUT_INPUTMAP_H_
 #define AEON_INPUT_INPUTMAP_H_
 
-#include <SDL.h>
+#include <Aeon/Includes.hpp>
 
 namespace Input
 {

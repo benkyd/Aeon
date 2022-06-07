@@ -1,12 +1,10 @@
 #ifndef AEON_INPUT_INPUT_H_
 #define AEON_INPUT_INPUT_H_
 
-#include <vector>
+#include <Aeon/Includes.hpp>
 
-#include <SDL.h>
-
-#include "Aeon/Singleton.hpp"
-#include "Aeon/Core/Events.hpp"
+#include <Aeon/Singleton.hpp>
+#include <Aeon/Core/Events.hpp>
 
 namespace Input 
 {

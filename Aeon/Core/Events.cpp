@@ -1,6 +1,6 @@
-#include "Aeon/Core/Events.hpp"
+#include "Events.hpp"
 
-#include "Aeon/Assert.hpp"
+#include <Aeon/Assert.hpp>
 
 using Core::GenericEvent;
 using Core::EventListener;

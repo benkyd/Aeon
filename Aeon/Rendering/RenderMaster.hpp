@@ -1,7 +1,7 @@
 #ifndef AEON_RENDERING_RENDERMASTER_H_
 #define AEON_RENDERING_RENDERMASTER_H_
 
-#include "Aeon/Singleton.hpp"
+#include <Aeon/Singleton.hpp>
 
 class Renderable;
 

@@ -1,12 +1,7 @@
 #ifndef AEON_RENDERING_IMGUI_H_
 #define AEON_RENDERING_IMGUI_H_
 
-#include <type_traits>
-
-#include <SDL.h>
-extern "C" {
-#include <ThirdParty/glad.h>
-}
+#include <Aeon/Includes.hpp>
 
 #include <Aeon/ThirdParty/ImGui/imgui.h>
 #include <Aeon/ThirdParty/ImGui/imgui_impl_sdl.h>

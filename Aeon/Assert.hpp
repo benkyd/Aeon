@@ -1,8 +1,7 @@
 #ifndef AEON_ASSERT_H_
 #define AEON_ASSERT_H_
 
-#include <assert.h>
-#include <iostream>
+#include <Aeon/Includes.hpp>
 
 #define AEON_ASSERT(x, m) \
     if (! (x)) { \
