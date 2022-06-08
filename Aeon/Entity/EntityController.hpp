@@ -13,8 +13,14 @@ namespace EC
 class EntityRegistry
 {
 public:
-    EntityRegistry();
-    ~EntityRegistry();
+    EntityRegistry()
+    {
+
+    }
+    ~EntityRegistry()
+    {
+        
+    }
 
     Entity& Create();
     Entity& Copy(const Entity& entity);
@@ -47,7 +53,7 @@ public:
     // std::vector<T&> Sort(std::function<;
 
 private:
-    // std::map<Entity<uint32_t>, std::vector<
+    // std::map<Entity<uint32_t>, std::vector<g
 
 };
     

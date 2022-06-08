@@ -4,6 +4,8 @@
 #include <Aeon/Core/Events.hpp>
 #include <Aeon/Rendering/ImGui.hpp>
 
+#include <Aeon/Entity/ComponentController.hpp>
+
 class BackgroundLevel : public Core::GameLayer {
 
 };
@@ -104,8 +106,17 @@ public:
 
 };
 
+
+struct GenericComponent
+{
+	int x,y;
+};
+
 int main( int argc, char** argv )
 {
+	EC::ComponentController cController;
+
+	cController.Register<GenericComponent>();
     ExampleGame game;
 
     return 0;

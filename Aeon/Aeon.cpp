@@ -13,6 +13,7 @@ using Input::InputController;
 App::App( const AppProperties& props, const DisplayProperties& dispProps )
 	: mDisplay()
 	, mInput(InputController::GetInstance())
+	, mEntityController( )
 {
 	PushThisAsSink( "ENGINE_DISPLAY_CORE" );
 

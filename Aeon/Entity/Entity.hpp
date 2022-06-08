@@ -6,10 +6,9 @@
 namespace EC
 {
 
-template <typename T>
 struct Entity
 {
-    T id;
+    uint32_t id;
 
     inline bool operator==( const Entity& rhs )
     {

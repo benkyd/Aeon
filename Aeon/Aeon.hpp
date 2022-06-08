@@ -44,10 +44,10 @@ public:
 private:
 	Display mDisplay;
 
-	EC::EntityController& mEntityController;
+	EC::EntityRegistry mEntityController;
 	Input::InputController& mInput;
 
-	// Game layers from z orderxko285132046
+	// Game layers from z order
 	std::vector<GameLayer*> mGameLayers;
 	std::vector<GameLayer*> mTopLayers;
 	std::vector<GameLayer*> mDebugLayers;
