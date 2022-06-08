@@ -21,5 +21,7 @@ extern "C" {
 #include <map>
 #include <optional>
 #include <functional>
+#include <queue>
+#include <array>
 
 #endif

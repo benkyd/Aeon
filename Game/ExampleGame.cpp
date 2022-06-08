@@ -106,17 +106,8 @@ public:
 
 };
 
-
-struct GenericComponent
-{
-	int x,y;
-};
-
 int main( int argc, char** argv )
 {
-	EC::ComponentController cController;
-
-	cController.Register<GenericComponent>();
     ExampleGame game;
 
     return 0;

@@ -6,20 +6,7 @@
 namespace EC
 {
 
-struct Entity
-{
-    uint32_t id;
-
-    inline bool operator==( const Entity& rhs )
-    {
-        return rhs.id == id;    
-    }
-
-    inline bool operator!=( const Entity& rhs )
-    {
-        return rhs.id != id;
-    }
-};
+using Entity = uint32_t;
 
 }
 

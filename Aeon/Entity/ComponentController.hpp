@@ -3,45 +3,61 @@
 
 #include <Aeon/Includes.hpp>
 
+struct Entity;
 
 namespace EC
 {
 
-struct IComponentArr
+// I wish i diddn't have to do it like this
+// someone fix this ahaha
+struct IComponentContainer
 {
-
+    virtual ~IComponentContainer() = default;
+    virtual void Create(const Entity&) = 0;
+    virtual void Destroy(const Entity&) = 0;
 };
 
 template <typename TComponent>
-struct ComponentArr : public IComponentArr
+struct ComponentContainer : public IComponentContainer
 {
+    ComponentContainer()
+    {
 
-    void Destroy();
+    }
+
+
+    void Destroy(const Entity&) override
+    {
+
+    }
+
+private:
+
+
 };
 
 class ComponentController
 {
 public:
-    ComponentController()
+    inline ComponentController()
     {
 
     }
-    ~ComponentController()
+    inline ~ComponentController()
     {
 
     }
 
     template <typename TComponent>
-    void Register()
+    inline void Register()
     {
-        const char* name = typeid(TComponent).name();
-        std::cout << name << std::endl;
+        std::string componentTypeName = static_cast<std::string>(typeid(TComponent).name());
+        std::cout << componentTypeName << std::endl;
     }
 
 
 private:
-    std::map<std::string, IComponentArr>
-
+    std::map<std::string, IComponentContainer> mComponentContainers;
 
 };
 
