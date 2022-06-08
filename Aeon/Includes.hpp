@@ -19,5 +19,7 @@ extern "C" {
 #include <iomanip>
 #include <tuple>
 #include <map>
+#include <optional>
+#include <functional>
 
 #endif

@@ -25,6 +25,8 @@ file(GLOB EngineSource
 	Aeon/*.cpp
     Aeon/Core/*.cpp
 	Aeon/Debug/*.cpp
+	Aeon/Entity/*.cpp
+	Aeon/Entity/CoreComponents/*.cpp
     Aeon/Input/*.cpp
 	Aeon/Maths/*.cpp
 	Aeon/Rendering/*.cpp

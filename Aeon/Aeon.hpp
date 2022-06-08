@@ -7,6 +7,7 @@
 #include <Aeon/Core/Events.hpp>
 #include <Aeon/Core/GameLayer.hpp>
 #include <Aeon/Input/Input.hpp>
+#include <Aeon/Entity/EntityController.hpp>
 
 namespace Core 
 {
@@ -43,6 +44,7 @@ public:
 private:
 	Display mDisplay;
 
+	EC::EntityController& mEntityController;
 	Input::InputController& mInput;
 
 	// Game layers from z orderxko285132046
