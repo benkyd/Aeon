@@ -3,8 +3,7 @@
 
 #include <Aeon/Includes.hpp>
 
-struct Entity;
-struct Component;
+#include <Aeon/Entity/Entity.hpp>
 
 namespace EC
 {
@@ -29,7 +28,7 @@ public:
     template <typename TComponent>
     TComponent& Replace(const Entity& entity);
     
-    // replace inplace
+    // replace in-place
     template <typename TComponent>
     TComponent& Patch(const Entity& entity);
 
@@ -48,7 +47,7 @@ public:
     // std::vector<T&> Sort(std::function<;
 
 private:
-
+    // std::map<Entity<uint32_t>, std::vector<
 
 };
     
