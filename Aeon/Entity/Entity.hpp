@@ -8,6 +8,11 @@ namespace EC
 
 using Entity = uint32_t;
 
+struct EntityDebugMetadata
+{
+    std::string DebugName;
+};
+
 }
 
 #endif

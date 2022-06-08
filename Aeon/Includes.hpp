@@ -3,7 +3,12 @@
 
 // shut up
 
+#ifdef __WIN32
 #include <SDL.h>
+#else
+#include <SDL2/SDL.h>
+#endif
+
 extern "C" {
 #include <Aeon/ThirdParty/glad.h>
 }

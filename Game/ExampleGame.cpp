@@ -91,6 +91,31 @@ public:
 	ExampleGame()
 		: App( { "Example" },  { "Game with AEON!" } )
 	{
+
+		EC::EntityRegistry registry;
+
+		EC::Entity entity1 = registry.Create();
+
+		std::cout << entity1 << std::endl;
+
+		std::vector<EC::Entity> entities;
+
+		for (int i = 0; i < 100000; i++)
+		{
+			entities.push_back(registry.Create());
+		}
+
+		std::cout << entities[entities.size()] << std::endl;
+
+		for (int i = 0; i < 100000; i++)
+		{
+			registry.Destroy(entities[i]);
+		}
+
+		entity1 = registry.Create();
+
+		std::cout << entity1 << std::endl;
+
 		Level* level = new Level;
 		PushLayer( (Core::GameLayer*)level );
 		DebugLayer* debug = new DebugLayer;

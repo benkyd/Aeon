@@ -12,7 +12,6 @@ namespace EC
 // someone fix this ahaha
 struct IComponentContainer
 {
-    virtual ~IComponentContainer() = default;
     virtual void Create(const Entity) = 0;
     virtual void Destroy(const Entity) = 0;
 };
@@ -25,6 +24,10 @@ struct ComponentContainer : public IComponentContainer
 
     }
 
+    void Create(const Entity) override
+    {
+
+    }
 
     void Destroy(const Entity) override
     {
@@ -57,7 +60,7 @@ public:
 
 
 private:
-    std::map<std::string, IComponentContainer> mComponentContainers;
+    // std::map<std::string, IComponentContainer> mComponentContainers;
 
 };
 

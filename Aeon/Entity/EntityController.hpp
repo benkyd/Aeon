@@ -16,10 +16,10 @@ public:
     EntityRegistry();
     ~EntityRegistry();
 
-    Entity Create()
+    Entity Create();
     Entity Copy( const Entity entity );
     void Destroy( Entity entity );
-    bool Valid(const Entity entity);
+    bool Valid( const Entity entity );
 
     // add, replace components
     template <typename TComponent>
@@ -47,12 +47,16 @@ public:
     // std::vector<T&> Sort(std::function<;
 
 private:
+    // Keep track of IDs that were freed for re-allocation
+    std::queue<uint32_t> mFreedEntities;
     uint32_t mEntityCeiling = 0;
 
-    // On destroy, the last entity is moved to the position
-    // of the old entity for cache coherency
-    std::map<Entity, std::vector<std::string>> mEntities
+    // Currently unused
+    std::unordered_map<Entity, EntityDebugMetadata> mEntityDebug;
 
+    // That's not very cache-friendly of you
+    // optimisations coming soon TM
+    std::unordered_map<Entity, std::vector<std::string>> mEntities;
 };
     
 }
