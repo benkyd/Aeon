@@ -13,8 +13,8 @@ namespace EC
 struct IComponentContainer
 {
     virtual ~IComponentContainer() = default;
-    virtual void Create(const Entity&) = 0;
-    virtual void Destroy(const Entity&) = 0;
+    virtual void Create(const Entity) = 0;
+    virtual void Destroy(const Entity) = 0;
 };
 
 template <typename TComponent>
@@ -26,7 +26,7 @@ struct ComponentContainer : public IComponentContainer
     }
 
 
-    void Destroy(const Entity&) override
+    void Destroy(const Entity) override
     {
 
     }
