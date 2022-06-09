@@ -96,25 +96,25 @@ public:
 
 		EC::Entity entity1 = registry.Create();
 
-		std::cout << entity1 << std::endl;
+		std::cout << "1: " << entity1 << std::endl;
 
 		std::vector<EC::Entity> entities;
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			entities.push_back(registry.Create());
 		}
 
 		std::cout << entities[entities.size()] << std::endl;
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
+			std::cout << "ENtity in vector pos " << i << " " << entities[i] << std::endl;
 			registry.Destroy(entities[i]);
 		}
 
-		entity1 = registry.Create();
-
-		std::cout << entity1 << std::endl;
+		EC::Entity entity2 = registry.Create();
+		std::cout << "2: " << entity2 << std::endl;
 
 		Level* level = new Level;
 		PushLayer( (Core::GameLayer*)level );
