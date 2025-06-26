@@ -37,8 +37,6 @@ private:
     SDL_Window* mWindow;
     SDL_GLContext mContext;
 
-    RenderMaster& mRenderer;
-
     unsigned int mWidth, mHeight = 0;
     unsigned int mX, mY = 0;
     float mClearColour[4];

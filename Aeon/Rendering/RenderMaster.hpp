@@ -11,12 +11,13 @@ namespace Rendering
 class RenderMaster : public Helpers::Singleton<Rendering::RenderMaster>
 {
 public:
-	RenderMaster();
+    RenderMaster();
 
-	void QueueRenderable( Renderable* renderable );
+    void QueueRenderable(Renderable* renderable);
+
+
 };
 
-
-}
+} // namespace Rendering
 
 #endif

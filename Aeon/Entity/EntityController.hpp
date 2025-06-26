@@ -1,9 +1,8 @@
 #ifndef AEON_ENTITY_ENTITYCONTROLLER_H_
 #define AEON_ENTITY_ENTITYCONTROLLER_H_
 
-#include <Aeon/Includes.hpp>
-
 #include <Aeon/Entity/Entity.hpp>
+#include <Aeon/Includes.hpp>
 
 namespace EC
 {
@@ -17,9 +16,9 @@ public:
     ~EntityRegistry();
 
     Entity Create();
-    Entity Copy( const Entity entity );
-    void Destroy( Entity entity );
-    bool Valid( const Entity entity );
+    Entity Copy(const Entity entity);
+    void Destroy(Entity entity);
+    bool Valid(const Entity entity);
 
     // add, replace components
     template <typename TComponent>
@@ -27,7 +26,7 @@ public:
 
     template <typename TComponent>
     TComponent& Replace(const Entity entity);
-    
+
     // replace in-place
     template <typename TComponent>
     TComponent& Patch(const Entity entity);
@@ -35,7 +34,7 @@ public:
     // Get component from entity based on T
     template <typename TComponent>
     TComponent& Get(const Entity entity);
-    
+
     // Get std::optional from entity based on T
     template <typename TComponent>
     std::optional<TComponent&> Opt(const Entity entity);
@@ -43,7 +42,7 @@ public:
     // TODO: Sort by component properties, for example list of
     // entities with the renderable components, sorted by Y pos
     // of position component
-    // template <typename T> 
+    // template <typename T>
     // std::vector<T&> Sort(std::function<;
 
 private:
@@ -58,7 +57,7 @@ private:
     // optimisations coming soon TM
     std::unordered_map<Entity, std::vector<std::string>> mEntities;
 };
-    
-}
+
+} // namespace EC
 
 #endif
