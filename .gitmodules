@@ -1,0 +1,3 @@
+[submodule "Aeon/ThirdParty/entt"]
+	path = Aeon/ThirdParty/entt
+	url = https://github.com/skypjack/entt

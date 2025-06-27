@@ -42,6 +42,9 @@ file(GLOB GameSource
 
 include_directories(${Aeon}
     "."
+    "Aeon/ThirdParty/"
+    "Aeon/ThirdParty/glm/"
+    "Aeon/ThirdParty/entt/src/"
     ${WinSDK}
     ${SDL2_INCLUDE_DIRS}
 )
