@@ -1,15 +1,12 @@
 #ifndef AEON_CORE_DISPLAY_H_
 #define AEON_CORE_DISPLAY_H_
 
-#include <Aeon/Includes.hpp>
-
-#include <Aeon/Rendering/RenderMaster.hpp>
 #include <Aeon/Core/EngineConfig.hpp>
 #include <Aeon/Core/Events.hpp>
+#include <Aeon/Includes.hpp>
 
-using namespace Rendering;
-
-namespace Core {
+namespace Core
+{
 
 class Display : public EventListener
 {
@@ -17,7 +14,7 @@ public:
     Display();
     ~Display();
 
-    bool Create( const DisplayProperties& properties );
+    bool Create(const DisplayProperties& properties);
 
     const unsigned int GetWidth();
     const unsigned int GetHeight();
@@ -25,13 +22,13 @@ public:
     const SDL_Window* GetWindow();
     const SDL_GLContext& GetContext();
 
-    void SetClearColour( float r, float g, float b, float a = 1.0f );
+    void SetClearColour(float r, float g, float b, float a = 1.0f);
 
     void EndFrame();
 
     void Destroy();
 
-    bool EventRecieved( GenericEvent& e ) override;
+    bool EventRecieved(GenericEvent& e) override;
 
 private:
     SDL_Window* mWindow;
@@ -42,10 +39,10 @@ private:
     float mClearColour[4];
 
 private:
-    Display( Display const& ) = delete;
-    void operator=( Display const& ) = delete;
+    Display(Display const&) = delete;
+    void operator=(Display const&) = delete;
 };
 
-}
+} // namespace Core
 
 #endif

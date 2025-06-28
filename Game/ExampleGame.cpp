@@ -1,6 +1,6 @@
 #include <Aeon/Aeon.hpp>
 #include <Aeon/Core/Events.hpp>
-#include <Aeon/Entity/ComponentController.hpp>
+#include <Aeon/Entity/Entity.hpp>
 #include <Aeon/Rendering/ImGui.hpp>
 #include <iostream>
 
@@ -51,7 +51,6 @@ public:
 
     void FrameTick() override
     {
-
         ImGui::Begin("Debug");
 
         ImGui::End();
@@ -77,34 +76,14 @@ public:
     ExampleGame()
         : App({"Example"}, {"Game with AEON!"})
     {
-        // EC::EntityRegistry registry;
-        //
-        // EC::Entity entity1 = registry.Create();
-        //
-        // std::cout << "1: " << entity1 << std::endl;
-        //
-        // std::vector<EC::Entity> entities;
-        //
-        // for (int i = 0; i < 100; i++)
-        // {
-        // 	entities.push_back(registry.Create());
-        // }
-        //
-        // std::cout << entities[entities.size()] << std::endl;
-        //
-        // for (int i = 0; i < 100; i++)
-        // {
-        // 	std::cout << "ENtity in vector pos " << i << " " << entities[i] << std::endl;
-        // 	registry.Destroy(entities[i]);
-        // }
-        //
-        // EC::Entity entity2 = registry.Create();
-        // std::cout << "2: " << entity2 << std::endl;
+        const auto entity = this->mEntityRegistry.create();
+        entity.emplace<EC::Transform>();
 
         Level* level = new Level;
+
         PushLayer((Core::GameLayer*)level);
-        DebugLayer* debug = new DebugLayer;
-        PushDebugLayer(debug);
+        PushDebugLayer(&debug);
+        DebugLayer debug;
         Run();
         delete level;
     }

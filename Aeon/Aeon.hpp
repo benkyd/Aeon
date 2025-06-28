@@ -1,15 +1,14 @@
 #ifndef AEON_AEON_H_
 #define AEON_AEON_H_
 
-#include <Aeon/Includes.hpp>
-
 #include <Aeon/Core/Display.hpp>
 #include <Aeon/Core/Events.hpp>
 #include <Aeon/Core/GameLayer.hpp>
+#include <Aeon/Entity/Entity.hpp>
+#include <Aeon/Includes.hpp>
 #include <Aeon/Input/Input.hpp>
-#include <Aeon/Entity/EntityController.hpp>
 
-namespace Core 
+namespace Core
 {
 
 // NOTE: Derivations / children of "App" cannot attatch
@@ -17,46 +16,46 @@ namespace Core
 // first add a gamelayer to handle events
 
 // App stores the GLOBAL gamestate
-// It is OK to store this globally 
+// It is OK to store this globally
 // every component needs to use state
 class App : public EventListener
 {
 public:
-	App( const AppProperties& props, const DisplayProperties& dispProps );
+    App(const AppProperties& props, const DisplayProperties& dispProps);
 
-	void Run();
+    void Run();
 
-	const Display& GetDisplay();
+    const Display& GetDisplay();
+    const EC::
 
-	// Layers, once assigned, until poped are assumed to 
-	// never change their spot in the layer hierarchy 
-	void PushLayer( GameLayer* layer );
-	void PushTopLayer( GameLayer* layer );
-	void PushDebugLayer( GameLayer* layer );
+    // Layers, once assigned, until poped are assumed to
+    // never change their spot in the layer hierarchy
+    void PushLayer(GameLayer* layer);
+    void PushTopLayer(GameLayer* layer);
+    void PushDebugLayer(GameLayer* layer);
 
-	bool EventRecieved( GenericEvent& e ) override;
+    bool EventRecieved(GenericEvent& e) override;
 
 public:
-	void PopLayer();
-	void PopTopLayer();
-	void PopDebugLayer();
+    void PopLayer();
+    void PopTopLayer();
+    void PopDebugLayer();
 
 private:
-	Display mDisplay;
+    Display mDisplay;
 
-	EC::EntityRegistry mEntityController;
-	Input::InputController& mInput;
+    EC::registry mEntityRegistry;
+    Input::InputController& mInput;
 
-	// Game layers from z order
-	std::vector<GameLayer*> mGameLayers;
-	std::vector<GameLayer*> mTopLayers;
-	std::vector<GameLayer*> mDebugLayers;
+    // Game layers from z order
+    std::vector<GameLayer*> mGameLayers;
+    std::vector<GameLayer*> mTopLayers;
+    std::vector<GameLayer*> mDebugLayers;
 
 private:
-	bool mSIGTERM = false;
-
+    bool mSIGTERM = false;
 };
 
-}
+} // namespace Core
 
 #endif
