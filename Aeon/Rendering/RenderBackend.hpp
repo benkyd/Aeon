@@ -1,0 +1,4 @@
+#ifndef AEON_RENDERING_MESH_H_
+#define AEON_RENDERING_MESH_H_
+
+#endif

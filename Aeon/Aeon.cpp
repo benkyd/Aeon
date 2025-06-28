@@ -1,7 +1,6 @@
 #include "Aeon.hpp"
 
 #include <Aeon/Includes.hpp>
-
 #include <Aeon/Rendering/ImGui.hpp>
 
 using Core::App;
@@ -10,85 +9,87 @@ using Core::DisplayProperties;
 
 using Input::InputController;
 
-App::App( const AppProperties& props, const DisplayProperties& dispProps )
-	: mDisplay()
-	, mInput(InputController::GetInstance())
-	, mEntityController( )
+App::App(const AppProperties& props, const DisplayProperties& dispProps)
+    : mDisplay(), mInput(InputController::GetInstance()), mEntityRegistry()
 {
-	PushThisAsSink( "ENGINE_DISPLAY_CORE" );
+    PushThisAsSink("ENGINE_DISPLAY_CORE");
 
-	mDisplay.Create( dispProps );
+    mDisplay.Create(dispProps);
 }
 
 void App::Run()
 {
-	while ( !mSIGTERM )
-	{
-		// Should do this ONLY on update (but needs to be on main thread)
-		mInput.PollInput();
+    while (!mSIGTERM)
+    {
+        // Should do this ONLY on update (but needs to be on main thread)
+        mInput.PollInput();
 
-		// tick through game layers
-		for ( const auto& layer : mGameLayers )
-		{
-			layer->FrameTick();
-		}
-		for ( const auto& layer : mTopLayers )
-		{
-			layer->FrameTick();
-		}
-		for ( const auto& layer : mDebugLayers )
-		{
-			layer->FrameTick();
-		}
+        // tick through game layers
+        for (const auto& layer : mGameLayers)
+        {
+            layer->FrameTick();
+        }
+        for (const auto& layer : mTopLayers)
+        {
+            layer->FrameTick();
+        }
+        for (const auto& layer : mDebugLayers)
+        {
+            layer->FrameTick();
+        }
 
-		// tick through game layers *but timed*
-		// TODO: Timed event thread (won't allow rendering)
-		for ( const auto& layer : mGameLayers )
-		{
-			layer->TimeTick();
-		}
-		for ( const auto& layer : mTopLayers )
-		{
-			layer->TimeTick();
-		}
-		for ( const auto& layer : mDebugLayers )
-		{
-			layer->TimeTick();
-		}
+        // tick through game layers *but timed*
+        // TODO: Timed event thread (won't allow rendering)
+        for (const auto& layer : mGameLayers)
+        {
+            layer->TimeTick();
+        }
+        for (const auto& layer : mTopLayers)
+        {
+            layer->TimeTick();
+        }
+        for (const auto& layer : mDebugLayers)
+        {
+            layer->TimeTick();
+        }
 
-		mDisplay.EndFrame();
-	}
+        mDisplay.EndFrame();
+    }
 
-	mDisplay.Destroy();
+    mDisplay.Destroy();
 }
 
 const Display& App::GetDisplay()
 {
-	return mDisplay;
+    return mDisplay;
 }
 
-void App::PushLayer( GameLayer* layer )
+EC::Registry& App::GetEntityRegistry()
 {
-	mGameLayers.push_back( layer );
+    return mEntityRegistry;
 }
 
-void App::PushTopLayer( GameLayer* layer )
+void App::PushLayer(GameLayer* layer)
 {
-	mTopLayers.push_back( layer );
+    mGameLayers.push_back(layer);
 }
 
-void App::PushDebugLayer( GameLayer* layer )
+void App::PushTopLayer(GameLayer* layer)
 {
-	mDebugLayers.push_back( layer );
+    mTopLayers.push_back(layer);
 }
 
-
-bool App::EventRecieved( GenericEvent& e )
+void App::PushDebugLayer(GameLayer* layer)
 {
-	if ( e.Type == "DISPLAY_CLOSED" )
-	{
-		mSIGTERM = true;
-	}
+    mDebugLayers.push_back(layer);
+}
 
-	return false;
+bool App::EventRecieved(GenericEvent& e)
+{
+    if (e.Type == "DISPLAY_CLOSED")
+    {
+        mSIGTERM = true;
+    }
+
+    return false;
 }

@@ -1,14 +1,14 @@
 #ifndef AEON_ENTITY_CORECOMPONENTS_MESH_H_
 #define AEON_ENTITY_CORECOMPONENTS_MESH_H_
 
-#include <Aeon/Rendering/Mesh.hpp>
+#include <Aeon/Rendering/Material.hpp>
 
 namespace EC
 {
 
-struct Mesh
+struct Material
 {
-    MeshHandle Handle;
+    MaterialHandle Handle;
 };
 
 } // namespace EC

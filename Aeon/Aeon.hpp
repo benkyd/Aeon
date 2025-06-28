@@ -26,7 +26,7 @@ public:
     void Run();
 
     const Display& GetDisplay();
-    const EC::
+    EC::Registry& GetEntityRegistry();
 
     // Layers, once assigned, until poped are assumed to
     // never change their spot in the layer hierarchy
@@ -44,7 +44,7 @@ public:
 private:
     Display mDisplay;
 
-    EC::registry mEntityRegistry;
+    EC::Registry mEntityRegistry;
     Input::InputController& mInput;
 
     // Game layers from z order

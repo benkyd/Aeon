@@ -1,6 +1,8 @@
 #ifndef AEON_CORE_ENGINECONFIG_H_
 #define AEON_CORE_ENGINECONFIG_H_
 
+#include <Aeon/Includes.hpp>
+
 namespace Core
 {
 

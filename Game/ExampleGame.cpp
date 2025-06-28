@@ -76,16 +76,17 @@ public:
     ExampleGame()
         : App({"Example"}, {"Game with AEON!"})
     {
-        const auto entity = this->mEntityRegistry.create();
-        entity.emplace<EC::Transform>();
+        const auto entity = GetEntityRegistry().create();
+        GetEntityRegistry().emplace<EC::Transform>(entity, EC::Transform({0.0f, 0.0f, 0.0f}));
 
         Level* level = new Level;
 
         PushLayer((Core::GameLayer*)level);
-        PushDebugLayer(&debug);
+
         DebugLayer debug;
+        PushDebugLayer(&debug);
+
         Run();
-        delete level;
     }
 
     ~ExampleGame()

@@ -9,15 +9,15 @@ namespace EC
 
 struct Transform
 {
-    Transform(glm::vec3 position) : position(position)
+    Transform(glm::vec3 position) : Position(position)
     {
     }
 
-    glm::vec3 position;
-    glm::quat rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    float scale = 1.0f;
+    glm::vec3 Position;
+    glm::quat Rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    float Scale = 1.0f;
 
-    glm::mat4 model;
+    glm::mat4 Model;
 };
 
 } // namespace EC
