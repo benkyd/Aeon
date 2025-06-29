@@ -15,8 +15,6 @@ set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
 
-add_subdirectory("Aeon/ThirdParty/assimp")
-
 # Adds RESOURCES constant in C++
 add_definitions(-DRESOURCES="${CMAKE_SOURCE_DIR}/resources/")
 message(${CMAKE_SOURCE_DIR}/resources)
@@ -32,9 +30,9 @@ file(GLOB EngineSource
     Aeon/Input/*.cpp
 	Aeon/Maths/*.cpp
 	Aeon/Rendering/*.cpp
-    Aeon/ThirdParty/*.cpp
-    Aeon/ThirdParty/*.c
-    Aeon/ThirdParty/ImGui/*.cpp
+    ThirdParty/*.cpp
+    ThirdParty/*.c
+    ThirdParty/ImGui/*.cpp
 )
 
 #temp
@@ -44,11 +42,11 @@ file(GLOB GameSource
 
 include_directories(${Aeon}
     "."
-    "Aeon/ThirdParty/"
-    "Aeon/ThirdParty/glm/"
-    "Aeon/ThirdParty/entt/src/"
-    "Aeon/ThirdParty/assimp/"
-    "Aeon/ThirdParty/yolo/"
+    "ThirdParty/"
+    "ThirdParty/glm/"
+    "ThirdParty/entt/src/"
+    "ThirdParty/assimp/"
+    "ThirdParty/Yolo/include"
     ${WinSDK}
     ${SDL2_INCLUDE_DIRS}
 )
@@ -57,6 +55,8 @@ add_executable(${Aeon}
     ${EngineSource}
     ${GameSource}
 )
+
+add_subdirectory("ThirdParty/assimp")
 
 target_link_libraries(${Aeon}
     ${WinSDK}

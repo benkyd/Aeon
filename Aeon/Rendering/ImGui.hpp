@@ -3,9 +3,9 @@
 
 #include <Aeon/Includes.hpp>
 
-#include <Aeon/ThirdParty/ImGui/imgui.h>
-#include <Aeon/ThirdParty/ImGui/imgui_impl_sdl.h>
-#include <Aeon/ThirdParty/ImGui/imgui_impl_opengl3.h>
+#include <ImGui/imgui.h>
+#include <ImGui/imgui_impl_sdl.h>
+#include <ImGui/imgui_impl_opengl3.h>
 
 namespace Rendering
 {

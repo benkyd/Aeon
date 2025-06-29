@@ -1,9 +1,9 @@
-[submodule "Aeon/ThirdParty/entt"]
-	path = Aeon/ThirdParty/entt
+[submodule "ThirdParty/entt"]
+	path = ThirdParty/entt
 	url = https://github.com/skypjack/entt
-[submodule "Aeon/ThirdParty/assimp"]
-	path = Aeon/ThirdParty/assimp
+[submodule "ThirdParty/assimp"]
+	path = ThirdParty/assimp
 	url = https://github.com/assimp/assimp
-[submodule "Aeon/ThirdParty/Yolo"]
-	path = Aeon/ThirdParty/Yolo
+[submodule "ThirdParty/Yolo"]
+	path = ThirdParty/Yolo
 	url = git@github.com:benkyd/Yolo

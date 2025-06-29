@@ -167,6 +167,9 @@ private:
     std::map<std::string, std::vector<std::tuple<EventListener*, int>>> mSinks;
 
     int mNextHeighest = 0;
+
+private:
+    uint8_t mYoloModule;
 };
 
 } // namespace Core

@@ -1,0 +1,8 @@
+example/*
+!example/example.cpp
+!example/CMakeLists.txt
+benchmark/*
+!benchmark/benchmark.cpp
+!benchmark/CMakeLists.txt
+.ccls-cache/
+compile_commands.json

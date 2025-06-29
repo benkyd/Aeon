@@ -3,6 +3,7 @@
 #include <Aeon/Entity/Entity.hpp>
 #include <Aeon/Rendering/ImGui.hpp>
 #include <iostream>
+#include <thread>
 
 class BackgroundLevel : public Core::GameLayer
 {

@@ -10,7 +10,7 @@
 #endif
 
 extern "C" {
-#include <Aeon/ThirdParty/glad.h>
+#include <glad.h>
 }
 
 #include <assert.h>

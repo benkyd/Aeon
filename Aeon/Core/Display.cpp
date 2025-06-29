@@ -3,12 +3,14 @@
 #include <Aeon/Assert.hpp>
 #include <Aeon/Includes.hpp>
 #include <Aeon/Rendering/ImGui.hpp>
+#include <yolo/yolo.hpp>
 
 using Core::Display;
 
 Display::Display()
     : mWindow(nullptr), mContext(NULL), mClearColour {1.0f, 1.0f, 1.0f, 1.0f}
 {
+    mYoloModule = yolo::registerModule("DISPLAY", "\e[0;33m");
     PushThisAsSink("ENGINE_DISPLAY_CORE");
 }
 
@@ -121,6 +123,8 @@ void Display::Destroy()
 
 bool Display::EventRecieved(GenericEvent& e)
 {
+    yolo::info(mYoloModule, "Recieved Event {}", e.Type.c_str());
+
     if (e.Type == "DISPLAY_RESIZE")
     {
         mWidth = e.x;

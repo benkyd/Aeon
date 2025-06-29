@@ -2,6 +2,7 @@
 
 #include <Aeon/Includes.hpp>
 #include <Aeon/Rendering/ImGui.hpp>
+#include <yolo/yolo.hpp>
 
 using Core::App;
 using Core::Display;
@@ -12,6 +13,8 @@ using Input::InputController;
 App::App(const AppProperties& props, const DisplayProperties& dispProps)
     : mDisplay(), mInput(InputController::GetInstance()), mEntityRegistry()
 {
+    yolo::info("AEON Initialising...");
+
     PushThisAsSink("ENGINE_DISPLAY_CORE");
 
     mDisplay.Create(dispProps);

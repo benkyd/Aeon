@@ -1,6 +1,7 @@
 #include "Events.hpp"
 
 #include <Aeon/Assert.hpp>
+#include <yolo/yolo.hpp>
 
 using Core::EventDispatcher;
 using Core::EventListener;
@@ -185,7 +186,7 @@ template <typename C, size_t N>
 struct reverse_wrapper<C[N]>
 {
 
-    C (&c_)
+    C(&c_)
     [N];
     reverse_wrapper(C (&c)[N]) : c_(c)
     {}
@@ -249,7 +250,8 @@ void EventManager::Dispatch(int dispatcherID, GenericEvent e)
 
 void EventManager::DebugPrint()
 {
-    std::cout << "----- BEGIN EVENTS DEBUG -----" << std::endl;
+    yolo::debug("----- BEGIN EVENTS DEBUG -----");
+
     for (auto const& [dispatcher, targetSink] : mSources)
     {
         auto stickySinks = mStickySinks[targetSink];
@@ -260,7 +262,7 @@ void EventManager::DebugPrint()
             if (source == targetSink)
                 sourceCount++;
 
-        std::cout << targetSink << " has " << stickySinks.size() << " sticky and " << sinks.size() << " sink(s) and is being dispatched from " << sourceCount << " different source(s)" << std::endl;
+        yolo::debug("{} has {} sticky and {} sink(s) and is being dispatched from {} dufferent source(s)", targetSink, stickySinks.size(), sinks.size(), sourceCount);
     }
-    std::cout << "----- END EVENTS DEBUG -----" << std::endl;
+    yolo::debug("----- END EVENTS DEBUG -----");
 }

@@ -39,7 +39,11 @@ private:
     float mClearColour[4];
 
 private:
-    Display(Display const&) = delete;
+    uint8_t mYoloModule;
+
+private:
+    Display(Display const&)
+        = delete;
     void operator=(Display const&) = delete;
 };
 
