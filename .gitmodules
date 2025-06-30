@@ -1,9 +1,0 @@
-[submodule "ThirdParty/entt"]
-	path = ThirdParty/entt
-	url = https://github.com/skypjack/entt
-[submodule "ThirdParty/assimp"]
-	path = ThirdParty/assimp
-	url = https://github.com/assimp/assimp
-[submodule "ThirdParty/Yolo"]
-	path = ThirdParty/Yolo
-	url = git@github.com:benkyd/Yolo
