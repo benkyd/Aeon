@@ -1,9 +1,6 @@
 #ifndef AEON_ENTITY_ENTITY_H_
 #define AEON_ENTITY_ENTITY_H_
 
-#include <Aeon/Entity/CoreComponents/Material.hpp>
-#include <Aeon/Entity/CoreComponents/Mesh.hpp>
-#include <Aeon/Entity/CoreComponents/Transform.hpp>
 #include <entt/entity/registry.hpp>
 #include <entt/entt.hpp>
 

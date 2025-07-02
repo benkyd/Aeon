@@ -1,5 +1,8 @@
 #include <Aeon/Aeon.hpp>
 #include <Aeon/Core/Events.hpp>
+#include <Aeon/Entity/CoreComponents/MaterialComponent.hpp>
+#include <Aeon/Entity/CoreComponents/MeshComponent.hpp>
+#include <Aeon/Entity/CoreComponents/Transform.hpp>
 #include <Aeon/Entity/Entity.hpp>
 #include <Aeon/Rendering/ImGui.hpp>
 #include <iostream>
@@ -77,11 +80,12 @@ public:
     ExampleGame()
         : App({"Example"}, {"Game with AEON!"})
     {
-        const auto entity = GetEntityRegistry().create();
+        EC::Entity entity = GetEntityRegistry().create();
         GetEntityRegistry().emplace<EC::Transform>(entity, EC::Transform({0.0f, 0.0f, 0.0f}));
+        GetEntityRegistry().emplace<EC::MeshComponent>(entity, EC::MeshComponent {});
+        GetEntityRegistry().emplace<EC::MaterialComponent>(entity, EC::MaterialComponent {});
 
         Level* level = new Level;
-
         PushLayer((Core::GameLayer*)level);
 
         DebugLayer debug;

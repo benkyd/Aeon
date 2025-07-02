@@ -6,11 +6,11 @@
 namespace EC
 {
 
-struct Mesh
+struct MeshComponent
 {
     MeshHandle Handle;
 };
 
-} // namespace EC
+}; // namespace EC
 
 #endif
