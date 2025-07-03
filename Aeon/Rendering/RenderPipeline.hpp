@@ -1,0 +1,9 @@
+#ifndef AEON_RENDERING_RENDERPIPELINE_H_
+#define AEON_RENDERING_RENDERPIPELINE_H_
+
+class Pipline
+{
+};
+
+#endif
+
